@@ -3,131 +3,125 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Binance Simulator AIO Engine</title>
+    <title>Binance Simulator AIO Pro</title>
     <style>
-        * { box-sizing: border-box; }
-        body { font-family: -apple-system, BlinkMacSystemFont, Arial, sans-serif; background-color: #181a20; color: #eaecef; padding: 20px 10px; margin: 0; display: flex; flex-direction: column; align-items: center; }
-        h1 { color: #f3ba2f; font-size: 24px; text-align: center; margin-bottom: 5px; }
-        .subtitle { font-size: 13px; color: #848e9c; text-align: center; margin-bottom: 25px; }
-        
-        /* Control Panel */
-        .setup-panel { width: 100%; max-width: 412px; background: #2b3139; padding: 20px; border-radius: 12px; border-left: 4px solid #f3ba2f; box-shadow: 0 4px 15px rgba(0,0,0,0.3); margin-bottom: 30px; }
-        .section-title { font-size: 14px; font-weight: bold; color: #f3ba2f; margin-bottom: 15px; border-bottom: 1px solid #474f59; padding-bottom: 6px; text-transform: uppercase; }
+        body { font-family: Arial, sans-serif; background-color: #181a20; color: white; padding: 20px 10px; display: flex; flex-direction: column; align-items: center; }
+        .panel { width: 100%; max-width: 400px; background: #2b3139; padding: 20px; border-radius: 12px; border-left: 4px solid #f3ba2f; margin-bottom: 20px; }
         .form-group { margin-bottom: 12px; display: flex; flex-direction: column; }
-        label { font-size: 12px; color: #848e9c; margin-bottom: 5px; font-weight: 500; }
-        input, select { padding: 10px; border-radius: 6px; border: 1px solid #474f59; background: #1e2026; color: white; font-size: 14px; }
-        
-        .action-btn { width: 100%; padding: 14px; background: #f3ba2f; color: #181a20; border: none; border-radius: 6px; font-size: 15px; font-weight: bold; cursor: pointer; margin-top: 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.2); }
-        .action-btn:hover { background: #dfa516; }
-        
-        /* Tabs Controller */
-        .mode-selector-tabs { display: flex; width: 100%; max-width: 412px; background: #2b3139; padding: 4px; border-radius: 8px; margin-bottom: 20px; }
-        .mode-tab-btn { flex: 1; padding: 10px; font-size: 13px; font-weight: bold; text-align: center; border-radius: 6px; cursor: pointer; color: #848e9c; transition: all 0.2s; }
-        .mode-tab-active { background: #f3ba2f; color: #181a20; }
-        
-        /* Mockup Output Display Container */
-        .preview-canvas-container { width: 100%; max-width: 412px; background: #ffffff; color: #000000; border-radius: 16px; overflow: hidden; box-shadow: 0 12px 35px rgba(0,0,0,0.6); position: relative; border: 1px solid #eaecef; min-height: 580px; }
-        
-        /* Phone Status Bar */
-        .iphone-status-header-bar { height: 38px; display: flex; justify-content: space-between; align-items: center; padding: 0 20px; font-size: 14px; font-weight: 600; }
-        .iphone-dark-theme-bar { background: #181a20; color: #ffffff; }
-        .iphone-light-theme-bar { background: #ffffff; color: #000000; }
-        .bar-icons-right-side { display: flex; align-items: center; gap: 5px; }
-        .net-badge-pill { font-size: 10px; padding: 1px 4px; border-radius: 4px; font-weight: bold; }
-        .net-pill-dark { background: #ffffff; color: #000000; }
-        .net-pill-light { background: #000000; color: #ffffff; }
-        .bat-shell-container { width: 22px; height: 11px; border-radius: 3px; display: flex; align-items: center; padding: 1px; position: relative; }
-        .bat-shell-dark { border: 1px solid #ffffff; }
-        .bat-shell-light { border: 1px solid #000000; }
-        .bat-fill-level { height: 100%; border-radius: 1px; }
-        .bat-fill-dark { background: #ffffff; }
-        .bat-fill-light { background: #000000; }
-
-        /* VIEW 1: WALLET LOOK */
-        #view-wallet { display: block; }
-        .wallet-nav-header { display: flex; justify-content: space-between; align-items: center; padding: 10px 16px; background: #ffffff; }
-        .wallet-logo-avatar { background: #fcd435; width: 34px; height: 34px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 16px; color: #181a20; }
-        .wallet-switch-toggle { display: flex; background: #eaecef; padding: 3px; border-radius: 8px; }
-        .wallet-toggle-tab { padding: 6px 14px; font-size: 14px; font-weight: 600; border-radius: 6px; color: #767f8d; }
-        .wallet-toggle-active { background: #ffffff; color: #1e2026; }
-        .wallet-main-pane { padding: 20px 16px 30px 16px; background: #ffffff; }
-        .wallet-account-row { font-size: 14px; font-weight: 600; color: #1e2026; margin-bottom: 8px; display: flex; align-items: center; gap: 4px; }
-        .wallet-big-balance { font-size: 36px; font-weight: 800; color: #1e2026; margin-bottom: 4px; letter-spacing: -0.5px; }
-        .wallet-grid-actions { display: flex; justify-content: space-between; margin: 25px 0; text-align: center; }
-        .wallet-grid-node { flex: 1; display: flex; flex-direction: column; align-items: center; gap: 8px; font-size: 13px; font-weight: 500; color: #1e2026; }
-        .wallet-node-circle { width: 44px; height: 44px; background: #f5f5f5; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 18px; }
-        .wallet-promo-banner { background: #fef8e6; border-radius: 12px; padding: 15px; display: flex; justify-content: space-between; align-items: center; margin-bottom: 25px; }
-        .wallet-tabs-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; border-bottom: 2px solid #f5f5f5; padding-bottom: 8px; }
-        .wallet-token-row { display: flex; justify-content: space-between; align-items: center; padding: 12px 0; }
-
-        /* VIEW 2: EMAIL LOOK */
-        #view-email { display: none; background: #121214; color: #ffffff; min-height: 550px; }
-        .gmail-action-bar { padding: 15px; display: flex; justify-content: space-between; align-items: center; font-size: 18px; color: #ffffff; }
-        .mail-content-block { padding: 15px 20px; }
-        .mail-subject-title { font-size: 19px; font-weight: 500; color: #ffffff; line-height: 1.4; margin-bottom: 20px; }
-        .mail-sender-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 25px; }
-        .mail-sender-avatar { width: 40px; height: 40px; background: #b366ff; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 18px; color: white; }
-        .binance-mail-card { background: #1e2026; border-radius: 4px; overflow: hidden; border: 1px solid #2b3139; color: #ffffff; }
-        .binance-mail-header { padding: 18px; text-align: center; border-bottom: 1px solid #2b3139; background: #181a20; color: #f3ba2f; font-weight: 800; letter-spacing: 2px; }
-        .binance-mail-body { padding: 25px 20px; background: #1e2026; }
-        .binance-mail-btn { display: inline-block; background: #f3ba2f; color: #181a20; text-decoration: none; font-weight: 700; padding: 12px 24px; border-radius: 4px; font-size: 14px; margin-bottom: 20px; }
-
-        /* VIEW 3: WITHDRAWAL DETAILS LOOK */
-        #view-withdrawal { display: none; background: #181a20; color: #ffffff; min-height: 550px; }
-        .with-header-bar { padding: 12px 16px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #2b3139; }
-        .with-hero-section { text-align: center; padding: 25px 16px; }
-        .with-hero-amt { font-size: 32px; font-weight: 700; color: #ffffff; margin-bottom: 6px; }
-        .with-status-pill { color: #0ecb81; font-size: 14px; font-weight: 600; display: flex; align-items: center; justify-content: center; gap: 4px; margin-bottom: 12px; }
-        .with-data-list { padding: 10px 20px; }
-        .with-data-row { display: flex; justify-content: space-between; padding: 14px 0; border-bottom: 1px solid #2b3139; font-size: 14px; }
-        .with-btn-footer { display: block; text-align: center; background: #f3ba2f; color: #181a20; font-weight: 700; text-decoration: none; padding: 14px; border-radius: 8px; font-size: 15px; margin: 25px 20px; }
+        label { font-size: 12px; color: #848e9c; margin-bottom: 5px; }
+        input { padding: 10px; border-radius: 6px; border: 1px solid #474f59; background: #1e2026; color: white; }
+        .btn { width: 100%; padding: 14px; background: #f3ba2f; color: #181a20; border: none; border-radius: 6px; font-weight: bold; cursor: pointer; margin-top: 10px; }
+        .tabs { display: flex; width: 100%; max-width: 400px; background: #2b3139; padding: 4px; border-radius: 8px; margin-bottom: 20px; }
+        .tab-btn { flex: 1; padding: 10px; text-align: center; border-radius: 6px; cursor: pointer; color: #848e9c; font-size: 13px; font-weight: bold; }
+        .active-tab { background: #f3ba2f; color: #181a20; }
+        .screen { width: 100%; max-width: 400px; background: white; color: black; border-radius: 16px; overflow: hidden; display: none; box-shadow: 0 10px 25px rgba(0,0,0,0.5); }
+        .top-bar { height: 38px; display: flex; justify-content: space-between; align-items: center; padding: 0 20px; font-weight: bold; font-size: 14px; }
+        .wallet-ui { padding: 20px; background: white; }
+        .mail-ui { padding: 20px; background: #1e2026; color: white; min-height: 350px; }
+        .with-ui { padding: 20px; background: #181a20; color: white; min-height: 400px; }
     </style>
 </head>
 <body>
 
-    <h1>Binance Core Engine Pro</h1>
-    <div class="subtitle">Unified Live Engine Screen Control Panel Dashboard</div>
+    <h1>Binance Live Engine</h1>
     
-    <!-- Central Control Form -->
-    <div class="setup-panel">
-        <div class="section-title">⚙️ Master Global Variables</div>
-        
-        <div class="form-group">
-            <label>iPhone System Time Indicator Bar (e.g., 7:50):</label>
-            <input type="text" id="inpTime" value="7:50">
-        </div>
-        
-        <div class="form-group">
-            <label>Battery Capacity Level Percentage (%):</label>
-            <input type="number" id="inpBat" value="25" min="1" max="100">
-        </div>
-
-        <div class="form-group">
-            <label>Network Signal Type (e.g., 4G, 5G):</label>
-            <input type="text" id="inpNet" value="4G">
-        </div>
-        
-        <div class="form-group">
-            <label>Variable Amount Field Value (USDT / USD):</label>
-            <input type="text" id="inpAmt" value="20,000.00">
-        </div>
-        
-        <div class="form-group">
-            <label>Deposit Notification Custom Date & Time:</label>
-            <input type="text" id="inpDateTime" value="2025-04-04 10:43:12">
-        </div>
-        
-        <button class="action-btn" onclick="synchronizeUnifiedMockupEngine()">Apply Changes Instantly</button>
+    <div class="panel">
+        <div class="form-group"><label>iPhone Time (e.g., 7:50):</label><input type="text" id="iTime" value="7:50"></div>
+        <div class="form-group"><label>Battery Level (%):</label><input type="number" id="iBat" value="25"></div>
+        <div class="form-group"><label>Amount (USDT / USD):</label><input type="text" id="iAmt" value="20,000.00"></div>
+        <div class="form-group"><label>Date & Time:</label><input type="text" id="iDate" value="2025-04-04 10:43:12"></div>
+        <button class="btn" onclick="syncData()">Apply Changes Instantly</button>
     </div>
 
-    <!-- View Mode Switch Tabs Buttons -->
-    <div class="mode-selector-tabs">
-        <div class="mode-tab-btn mode-tab-active" id="tab-w" onclick="switchActiveViewDisplay('wallet')">1. Web3 Wallet</div>
-        <div class="mode-tab-btn" id="tab-e" onclick="switchActiveViewDisplay('email')">2. Deposit Email</div>
-        <div class="mode-tab-btn" id="tab-wt" onclick="switchActiveViewDisplay('withdrawal')">3. Withdrawal</div>
+    <div class="tabs">
+        <div class="tab-btn active-tab" id="tb-w" onclick="showScreen('w')">1. Web3 Wallet</div>
+        <div class="tab-btn" id="tb-e" onclick="showScreen('e')">2. Deposit Email</div>
+        <div class="tab-btn" id="tb-wt" onclick="showScreen('wt')">3. Withdrawal</div>
     </div>
 
-    <!-- Phone Simulator Preview Frame Area -->
-    <div class="preview-canvas-container" id="mockupCanvasFrame">
+    <!-- Phone Canvas Screen -->
+    <div class="screen" id="phoneScreen" style="display: block;">
+        <div class="top-bar" id="popBar" style="background: white; color: black;">
+            <span id="txtTime">7:50</span>
+            <div><span>5G </span><span id="txtBat">25%</span>🔋</div>
+        </div>
         
-        <!-- iPhone Status Bar Layer Component -->
+        <!-- View 1 -->
+        <div id="box-w" class="wallet-ui">
+            <div style="font-size:14px; font-weight:600; margin-bottom:15px;">John's Wallet ▾</div>
+            <div style="font-size: 34px; font-weight: 800;">$<span id="wBal">20,000.00</span></div>
+            <div style="color: #0ecb81; font-weight: bold; margin-bottom: 20px;">+0.21%</div>
+            <div style="display:flex; justify-content:space-between; margin-bottom:20px; font-weight:bold;"><div>📤 Send</div><div>📥 Receive</div><div>⇄ Transfer</div></div>
+            <div style="background:#fef8e6; padding:12px; border-radius:8px; font-size:13px; color:#1e2026;">Swap to win up to 1 BTC</div>
+        </div>
+
+        <!-- View 2 -->
+        <div id="box-e" class="mail-ui" style="display: none;">
+            <div style="font-size:16px; font-weight:bold; margin-bottom:15px;">[Binance] USDT Deposit Confirmed</div>
+            <div style="font-size:12px; color:#848e9c; margin-bottom:20px;">Date: <span id="eDate">2025-04-04 10:43:12</span></div>
+            <div style="background:#2b3139; padding:15px; border-radius:6px; border:1px solid #474f59;">
+                <h3 style="color:#f3ba2f; margin-top:0;">USDT Deposit Successful</h3>
+                <p style="font-size:13px; line-height:1.5;">Your deposit of <span id="eAmt" style="font-weight:bold; color:white;">20,000.00</span> USDT is now available.</p>
+            </div>
+        </div>
+
+        <!-- View 3 -->
+        <div id="box-wt" class="with-ui" style="display: none;">
+            <div style="text-align:center; padding:20px 0;">
+                <div style="font-size:28px; font-weight:bold;" id="wtHero">-20,000.00 USDT</div>
+                <div style="color:#0ecb81; font-weight:bold; margin-top:5px;">✓ Completed</div>
+            </div>
+            <div style="border-top:1px solid #2b3139; padding-top:15px; font-size:14px;">
+                <div style="display:flex; justify-content:space-between; margin-bottom:12px;"><span style="color:#848e9c;">Network</span><span>TRX</span></div>
+                <div style="display:flex; justify-content:space-between; margin-bottom:12px;"><span style="color:#848e9c;">Amount</span><span id="wtAmt">20,000.00 USDT</span></div>
+                <div style="display:flex; justify-content:space-between;"><span style="color:#848e9c;">Date</span><span id="wtDate">2025-04-04 10:43:12</span></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function syncData() {
+            var tm = document.getElementById('iTime').value;
+            var bt = document.getElementById('iBat').value;
+            var am = document.getElementById('iAmt').value;
+            var dt = document.getElementById('iDate').value;
+
+            document.getElementById('txtTime').innerText = tm;
+            document.getElementById('txtBat').innerText = bt + "%";
+            document.getElementById('wBal').innerText = am;
+            document.getElementById('eDate').innerText = dt;
+            document.getElementById('eAmt').innerText = am;
+            document.getElementById('wtHero').innerText = "-" + am + " USDT";
+            document.getElementById('wtAmt').innerText = am + " USDT";
+            document.getElementById('wtDate').innerText = dt;
+            alert("Updated successfully! Scroll down to view.");
+        }
+
+        function showScreen(type) {
+            document.getElementById('tb-w').classList.remove('active-tab');
+            document.getElementById('tb-e').classList.remove('active-tab');
+            document.getElementById('tb-wt').classList.remove('active-tab');
+            
+            document.getElementById('box-w').style.display = 'none';
+            document.getElementById('box-e').style.display = 'none';
+            document.getElementById('box-wt').style.display = 'none';
+            
+            var bar = document.getElementById('popBar');
+
+            if(type === 'w') {
+                document.getElementById('tb-w').classList.add('active-tab');
+                document.getElementById('box-w').style.display = 'block';
+                bar.style.background = "white"; bar.style.color = "black";
+            } else if(type === 'e') {
+                document.getElementById('tb-e').classList.add('active-tab');
+                document.getElementById('box-e').style.display = 'block';
+                bar.style.background = "#1e2026"; bar.style.color = "white";
+            } else if(type === 'wt') {
+                document.getElementById('tb-wt').classList.add('active-tab');
+                document.getElementById('box-wt').style.display = 'block';
+                bar.style.background = "#181a20"; bar.style.color = "white";
+            }
+        }
+    </script>
+</body>
+</html>
