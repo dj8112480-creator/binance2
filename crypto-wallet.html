@@ -1,22 +1,73 @@
 <!DOCTYPE html>
-<html lang="bn">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Crypto Wallet</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Spot Wallet</title>
     <style>
-        body { font-family: Arial, sans-serif; background-color: #181a20; color: #eaecef; padding: 30px; }
-        .back-btn { display: inline-block; color: #f3ba2f; text-decoration: none; margin-bottom: 20px; font-size: 18px; }
-        .wallet-balance { background: #2b3139; padding: 20px; border-radius: 8px; font-size: 20px; }
-        .highlight { color: #0ecb81; font-weight: bold; }
+        body { font-family: -apple-system, BlinkMacSystemFont, Arial, sans-serif; background-color: #121214; color: #eaecef; margin: 0; padding: 0; display: flex; flex-direction: column; align-items: center; }
+        .phone-canvas { width: 100%; max-width: 412px; min-height: 100vh; background-color: #181a20; display: flex; flex-direction: column; }
+        .status-bar { height: 32px; background-color: #181a20; color: #ffffff; display: flex; justify-content: space-between; align-items: center; padding: 0 16px; font-size: 13px; }
+        .status-right { display: flex; align-items: center; gap: 6px; }
+        .battery-icon { width: 22px; height: 11px; border: 1px solid #848e9c; border-radius: 3px; position: relative; display: flex; align-items: center; padding: 1px; }
+        .battery-level { height: 100%; background-color: #eaecef; border-radius: 1px; }
+        .wallet-nav { padding: 15px; display: flex; align-items: center; font-size: 16px; font-weight: bold; border-bottom: 1px solid #2b3139; }
+        .wallet-nav a { color: white; text-decoration: none; margin-right: 20px; }
+        .balance-card { padding: 22px 20px; background-color: #1e2026; }
+        .title { color: #848e9c; font-size: 12px; margin-bottom: 6px; }
+        .crypto-balance { font-size: 28px; font-weight: 700; color: #ffffff; }
+        .fiat-balance { color: #848e9c; font-size: 13px; margin-top: 4px; font-weight: 500; }
+        .list-section { padding: 20px; background: #181a20; flex-grow: 1; }
+        .section-header { font-size: 15px; font-weight: bold; margin-bottom: 12px; color: #ffffff; }
+        .coin-row { display: flex; justify-content: space-between; align-items: center; padding: 15px 0; border-bottom: 1px solid #2b3139; }
+        .coin-name { font-weight: bold; font-size: 15px; color: white; }
+        .coin-full { color: #848e9c; font-size: 11px; display: block; margin-top: 2px; }
+        .coin-vals { text-align: right; }
+        .coin-amount { font-weight: 600; font-size: 15px; color: white; }
+        .coin-usd { color: #848e9c; font-size: 11px; margin-top: 2px; }
     </style>
 </head>
 <body>
-    <a href="index.html" class="back-btn">⬅️ মূল মেনুতে ফিরে যান</a>
-    <div class="wallet-balance">
-        <h2>ক্রিপ্টো ওয়ালেট ব্যালেন্স</h2>
-        <p>টোটাল ব্যালেন্স: <span class="highlight">$540.25 USD</span></p>
-        <p>স্পট ওয়ালেট: 0.012 BTC</p>
+    <div class="phone-canvas">
+        <div class="status-bar">
+            <span class="time">09:41</span>
+            <div class="status-right">
+                <span class="net">4G</span> <span class="bat-num">85%</span>
+                <div class="battery-icon"><div class="battery-level"></div></div>
+            </div>
+        </div>
+        <div class="wallet-nav"><a href="index.html">←</a><span>Spot Wallet</span></div>
+        <div class="balance-card">
+            <div class="title">Total Balance</div>
+            <div class="crypto-balance" id="cryptoTotal">0.00000000 <span style="font-size: 15px; color:#f3ba2f;">BTC</span></div>
+            <div class="fiat-balance" id="fiatTotal">≈ $500.00 USD</div>
+        </div>
+        <div class="list-section">
+            <div class="section-header">Crypto Balances</div>
+            <div class="coin-row">
+                <div><span class="coin-name">USDT</span><span class="coin-full">Tether US</span></div>
+                <div class="coin-vals"><span class="coin-amount" id="coinAmt">500.00</span><span class="coin-usd" id="coinUsd">$500.00</span></div>
+            </div>
+        </div>
     </div>
+    <script>
+        window.onload = function() {
+            let now = new Date();
+            document.querySelector('.time').innerText = now.getHours().toString().padStart(2, '0') + ":" + now.getMinutes().toString().padStart(2, '0');
+            let amt = localStorage.getItem('b_amount') || '500.00';
+            let bat = localStorage.getItem('b_battery') || '85';
+            let net = localStorage.getItem('b_net') || '4G';
+            let formattedAmt = parseFloat(amt).toFixed(2);
+            let simulatedBTC = (amt / 62000).toFixed(8); 
+            
+            document.getElementById('cryptoTotal').innerHTML = simulatedBTC + ' <span style="font-size: 15px; color:#f3ba2f;">BTC</span>';
+            document.getElementById('fiatTotal').innerText = "≈ $" + formattedAmt + " USD";
+            document.getElementById('coinAmt').innerText = formattedAmt;
+            document.getElementById('coinUsd').innerText = "$" + formattedAmt;
+            document.querySelector('.bat-num').innerText = bat + "%";
+            document.querySelector('.battery-level').style.width = bat + "%";
+            document.querySelector('.net').innerText = (net === 'Wi-Fi') ? "📶" : net;
+        }
+    </script>
 </body>
 </html>
