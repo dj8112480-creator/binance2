@@ -3,64 +3,111 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Withdrawal Submitted</title>
+    <title>Withdrawal Receipt View</title>
     <style>
-        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif; background-color: #121214; color: #eaecef; margin: 0; padding: 0; display: flex; flex-direction: column; align-items: center; }
-        .phone-canvas { width: 100%; max-width: 412px; min-height: 100vh; background-color: #181a20; display: flex; flex-direction: column; }
-        .status-bar { height: 32px; background-color: #181a20; display: flex; justify-content: space-between; align-items: center; padding: 0 16px; font-size: 13px; font-weight: 500; }
-        .status-right { display: flex; align-items: center; gap: 6px; }
-        .battery-icon { width: 22px; height: 11px; border: 1px solid #848e9c; border-radius: 3px; position: relative; display: flex; align-items: center; padding: 1px; }
-        .battery-level { height: 100%; background-color: #eaecef; border-radius: 1px; }
-        .app-header { padding: 15px; display: flex; align-items: center; font-size: 16px; font-weight: 600; border-bottom: 1px solid #2b3139; }
-        .app-header a { color: #ffffff; text-decoration: none; margin-right: 20px; font-size: 18px; }
-        .content { padding: 35px 24px; text-align: center; flex-grow: 1; }
-        .success-circle { width: 56px; height: 56px; background: rgba(14, 203, 129, 0.15); border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; margin-bottom: 20px; }
-        .success-check { color: #0ecb81; font-size: 28px; font-weight: bold; }
-        .amount-title { font-size: 26px; font-weight: 700; color: #ffffff; margin-bottom: 4px; }
-        .status-text { color: #848e9c; font-size: 13px; margin-bottom: 35px; }
-        .info-box { background: #1e2026; border-radius: 8px; padding: 16px; text-align: left; }
-        .info-row { display: flex; justify-content: space-between; padding: 12px 0; border-bottom: 1px solid #2b3139; font-size: 13px; }
-        .info-row:last-child { border-bottom: none; }
-        .label { color: #848e9c; }
-        .value { color: #eaecef; font-weight: 500; }
-        .btn-done { display: block; text-align: center; background-color: #f3ba2f; color: #181a20; font-weight: bold; text-decoration: none; padding: 12px; border-radius: 6px; font-size: 14px; margin-top: 40px; }
+        body { font-family: -apple-system, BlinkMacSystemFont, Arial, sans-serif; background-color: #000000; color: #ffffff; margin: 0; padding: 0; display: flex; flex-direction: column; align-items: center; }
+        .phone-canvas { width: 100%; max-width: 412px; min-height: 100vh; background-color: #181a20; display: flex; flex-direction: column; box-shadow: 0 0 20px rgba(0,0,0,0.8); }
+        
+        /* iPhone Status Bar Top Layer Row (White indicators icons text) */
+        .status-bar { height: 36px; display: flex; justify-content: space-between; align-items: center; padding: 0 20px; font-size: 14px; font-weight: 600; color: #ffffff; background: #181a20; }
+        .status-right { display: flex; align-items: center; gap: 5px; }
+        .net-icon-badge { font-size: 10px; background: #ffffff; color: #000000; padding: 1px 3px; border-radius: 3px; font-weight: bold; }
+        .battery-shell { width: 22px; height: 11px; border: 1px solid #ffffff; border-radius: 3px; display: flex; align-items: center; padding: 1px; position: relative; }
+        .battery-core-fill { height: 100%; background-color: #ffffff; border-radius: 1px; }
+
+        /* Navigation Page Header App Toolbar */
+        .app-header-navigation-row { padding: 12px 16px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #2b3139; }
+        .app-header-title-text { font-size: 17px; font-weight: 700; color: #ffffff; margin: 0 auto 0 auto; text-align: center; }
+        
+        /* Core Center Summary Box Card Block */
+        .withdrawal-summary-hero-card { text-align: center; padding: 25px 16px; }
+        .hero-amount-display-value { font-size: 32px; font-weight: 700; color: #ffffff; margin-bottom: 6px; }
+        .status-completed-pill-tag { color: #0ecb81; font-size: 14px; font-weight: 600; display: flex; align-items: center; justify-content: center; gap: 4px; margin-bottom: 12px; }
+        .notice-paragraph-text-under-hero { color: #848e9c; font-size: 12px; line-height: 1.5; padding: 0 15px; margin-bottom: 6px; }
+        .help-hyperlink-yellow-anchor { color: #dfa516; font-size: 12px; font-weight: 500; text-decoration: none; }
+
+        /* Meta Rows List Group Box Content area */
+        .metadata-records-list-wrapper { padding: 10px 20px; flex-grow: 1; }
+        .data-row-container { display: flex; justify-content: space-between; padding: 14px 0; border-bottom: 1px solid #2b3139; font-size: 14px; align-items: flex-start; }
+        .meta-field-label { color: #848e9c; min-width: 100px; }
+        .meta-field-value { color: #ffffff; font-weight: 500; text-align: right; max-width: 240px; word-break: break-all; }
+        .copy-action-btn-inline { color: #848e9c; font-size: 12px; margin-left: 4px; cursor: pointer; }
+        
+        /* Bottom Large Call To Action Form Button */
+        .action-button-full-width-yellow { display: block; text-align: center; background: #f3ba2f; color: #181a20; font-weight: 700; text-decoration: none; padding: 14px; border-radius: 8px; font-size: 15px; margin: 25px 20px; box-shadow: 0 4px 10px rgba(0,0,0,0.15); }
     </style>
 </head>
 <body>
+
     <div class="phone-canvas">
+        <!-- Status Bar Layer -->
         <div class="status-bar">
-            <span class="time">09:41</span>
+            <span id="wtTime">6:54</span>
             <div class="status-right">
-                <span class="net">4G</span> <span class="bat-num">85%</span>
-                <div class="battery-icon"><div class="battery-level"></div></div>
+                <span class="net-icon-badge" id="wtNet">4G</span>
+                <span id="wtBatNum">21%</span>
+                <div class="battery-shell"><div class="battery-core-fill" id="wtBatFill" style="width: 21%;"></div></div>
             </div>
         </div>
-        <div class="app-header"><a href="index.html">←</a><span>Withdrawal Submitted</span></div>
-        <div class="content">
-            <div class="success-circle"><span class="success-check">✓</span></div>
-            <div class="amount-title" id="dispAmount">500.00 USDT</div>
-            <div class="status-text">Withdrawal request submitted</div>
-            <div class="info-box">
-                <div class="info-row"><span class="label">Destination</span><span class="value">Crypto Address</span></div>
-                <div class="info-row"><span class="label">Network</span><span class="value">TRX (TRC20)</span></div>
-                <div class="info-row"><span class="label">Source</span><span class="value">Spot Wallet</span></div>
-            </div>
-            <a href="index.html" class="btn-done">Done</a>
+
+        <!-- Navigation Title Bar Element Component -->
+        <div class="app-header-navigation-row">
+            <span style="font-size:18px; cursor:pointer;">←</span>
+            <div class="app-header-title-text">Withdrawal Details</div>
+            <span style="font-size:18px; visibility:hidden;">→</span>
         </div>
+
+        <!-- Hero Value Header Display block -->
+        <div class="withdrawal-summary-hero-card">
+            <div class="hero-amount-display-value" id="dspWithAmt">-98.5 USDT</div>
+            <div class="status-completed-pill-tag">✓ Completed</div>
+            <div class="notice-paragraph-text-under-hero">Crypto transferred out of Binance. Please contact the recipient platform for your transaction receipt.</div>
+            <a href="#" class="help-hyperlink-yellow-anchor">Why hasn't my withdrawal arrived?</a>
+        </div>
+
+        <!-- Details Grid Data Lists Key Value Elements -->
+        <div class="metadata-records-list-wrapper">
+            <div class="data-row-container"><span class="meta-field-label">Network</span><span class="meta-field-value">TRX</span></div>
+            
+            <div class="data-row-container">
+                <span class="meta-field-label">Address</span>
+                <span class="meta-field-value" style="font-family:monospace; font-size:13px;">
+                    TX7afK9RjMvC5zHqE7bHn2C6eK5d4cfr<br>5d4c3b2a <span class="copy-action-btn-inline">📋</span>
+                    <div style="color:#dfa516; font-size:12px; margin-top:4px; font-family:sans-serif;">Save Address</div>
+                </span>
+            </div>
+
+            <div class="data-row-container">
+                <span class="meta-field-label">Txid</span>
+                <span class="meta-field-value" style="font-family:monospace; font-size:12px; color:#848e9c;">
+                    df85b7e88d8b46e356c9a75d5a73e6550<br>742d991b5c4687d653738495a43586 <span class="copy-action-btn-inline">📋</span>
+                </span>
+            </div>
+
+            <div class="data-row-container"><span class="meta-field-label">Amount</span><span class="meta-field-value" id="dspWithTotalAmt">100 USDT</span></div>
+            <div class="data-row-container"><span class="meta-field-label">Network fee</span><span class="meta-field-value">1.5 TRX</span></div>
+            <div class="data-row-container"><span class="meta-field-label">Wallet</span><span class="meta-field-value">Spot Wallet</span></div>
+            <div class="data-row-container"><span class="meta-field-label">Date</span><span class="meta-field-value" id="dspWithDate" style="font-size:13px;">2026-08-09 19:45:21</span></div>
+            
+            <div style="text-align:center; padding:15px 0; color:#848e9c; font-size:13px;">📋 Scan Report</div>
+        </div>
+
+        <!-- Bottom Form Action Button Link Call element -->
+        <a href="index.html" class="action-button-full-width-yellow">Withdraw Again</a>
     </div>
+
     <script>
         window.onload = function() {
-            let now = new Date();
-            document.querySelector('.time').innerText = now.getHours().toString().padStart(2, '0') + ":" + now.getMinutes().toString().padStart(2, '0');
-            let amt = localStorage.getItem('b_amount') || '500.00';
-            let bat = localStorage.getItem('b_battery') || '85';
-            let net = localStorage.getItem('b_net') || '4G';
-            document.getElementById('dispAmount').innerText = parseFloat(amt).toFixed(2) + " USDT";
-            document.querySelector('.bat-num').innerText = bat + "%";
-            document.querySelector('.battery-level').style.width = bat + "%";
-            document.querySelector('.net').innerText = (net === 'Wi-Fi') ? "📶" : net;
+            document.getElementById('wtTime').innerText = localStorage.getItem('p_time') || '6:54';
+            document.getElementById('wtNet').innerText = localStorage.getItem('p_net') || '4G';
+            let bat = localStorage.getItem('p_bat') || '21';
+            document.getElementById('wtBatNum').innerText = bat + "%";
+            document.getElementById('wtBatFill').style.width = bat + "%";
+            
+            document.getElementById('dspWithAmt').innerText = localStorage.getItem('wt_amt') || '-98.5 USDT';
+            document.getElementById('dspWithTotalAmt').innerText = localStorage.getItem('wt_tamt') || '100 USDT';
+            document.getElementById('dspWithDate').innerText = localStorage.getItem('wt_date') || '2026-08-09 19:45:21';
         }
     </script>
 </body>
 </html>
-
