@@ -3,126 +3,64 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>[Binance] USDT Deposit Confirmed</title>
+    <title>Email Notification</title>
     <style>
         body { font-family: -apple-system, BlinkMacSystemFont, Arial, sans-serif; background-color: #121214; color: #ffffff; margin: 0; padding: 0; display: flex; flex-direction: column; align-items: center; }
         .phone-canvas { width: 100%; max-width: 412px; min-height: 100vh; background-color: #121214; display: flex; flex-direction: column; box-shadow: 0 0 20px rgba(0,0,0,0.6); }
-        
-        /* iPhone Status Bar Top Layer Row (White indicators icons text) */
-        .status-bar { height: 36px; display: flex; justify-content: space-between; align-items: center; padding: 0 20px; font-size: 14px; font-weight: 600; color: #ffffff; background: #121214; }
-        .status-right { display: flex; align-items: center; gap: 5px; }
+        .status-bar { height: 36px; display: flex; justify-content: space-between; align-items: center; padding: 0 20px; font-size: 14px; font-weight: 600; color: #ffffff; }
+        .bar-right { display: flex; align-items: center; gap: 5px; }
         .net-tag { font-size: 10px; background: #ffffff; color: #000000; padding: 1px 3px; border-radius: 3px; font-weight: bold; }
-        .battery-box { width: 22px; height: 11px; border: 1px solid #ffffff; border-radius: 3px; display: flex; align-items: center; padding: 1px; position: relative; }
-        .battery-level { height: 100%; background-color: #ffffff; border-radius: 1px; }
-
-        /* Gmail Top Bar Actions Navigation Row */
-        .gmail-action-bar { padding: 15px; display: flex; justify-content: space-between; align-items: center; font-size: 18px; }
-        .gmail-left-nav { display: flex; align-items: center; gap: 25px; }
-        .gmail-right-icons { display: flex; gap: 22px; font-size: 16px; color: #eaecef; }
-        
-        /* Email Text Content Meta Box Block */
-        .mail-inner-content-padding { padding: 15px 20px; flex-grow: 1; }
-        .mail-subject-headline { font-size: 20px; font-weight: 500; color: #ffffff; line-height: 1.4; margin-bottom: 20px; display: flex; justify-content: space-between; align-items: flex-start; }
-        .sender-meta-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px; }
-        .sender-left { display: flex; gap: 12px; align-items: center; }
-        .sender-avatar-circle { width: 40px; height: 40px; background: #b366ff; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 18px; color: white; }
-        .sender-name-title { font-size: 15px; font-weight: 600; color: #ffffff; }
-        .sender-to-label { font-size: 13px; color: #848e9c; margin-top: 2px; }
-        .sender-right-actions { display: flex; gap: 20px; color: #848e9c; font-size: 14px; }
-
-        /* Official Embedded Binance Mail Template Box Layout Container */
-        .binance-official-mail-card { background: #1e2026; border-radius: 4px; overflow: hidden; border: 1px solid #2b3139; }
-        .binance-header-branding { padding: 20px; text-align: center; border-bottom: 1px solid #2b3139; background: #181a20; }
-        .binance-logo-svg { color: #f3ba2f; font-size: 18px; font-weight: 800; letter-spacing: 2px; display: flex; align-items: center; justify-content: center; gap: 5px; }
-        .mail-body-wrapper-block { padding: 30px 20px; background: #1e2026; }
-        .msg-heading-title { font-size: 20px; font-weight: 700; color: #ffffff; margin-bottom: 20px; }
-        .msg-core-paragraph { font-size: 14px; color: #eaecef; line-height: 1.6; margin-bottom: 30px; }
-        .action-button-link-yellow { display: inline-block; background: #f3ba2f; color: #181a20; text-decoration: none; font-weight: 700; padding: 12px 24px; border-radius: 4px; font-size: 14px; margin-bottom: 25px; }
-        .warning-footer-note { font-size: 13px; color: #fcd435; line-height: 1.5; border-top: 1px solid #2b3139; padding-top: 20px; }
-        
-        /* Bottom Action Footer Row Elements Bar */
-        .mail-reply-bottom-action-bar { display: flex; justify-content: space-around; padding: 15px 0; border-top: 1px solid #2b3139; font-size: 13px; color: #848e9c; }
+        .bat-box { width: 22px; height: 11px; border: 1px solid #ffffff; border-radius: 3px; display: flex; align-items: center; padding: 1px; }
+        .bat-fill { height: 100%; background-color: #ffffff; border-radius: 1px; }
+        .gmail-bar { padding: 15px; display: flex; justify-content: space-between; align-items: center; font-size: 18px; }
+        .mail-padding { padding: 15px 20px; flex-grow: 1; }
+        .subject { font-size: 19px; font-weight: 500; color: #ffffff; line-height: 1.4; margin-bottom: 20px; }
+        .sender-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 25px; }
+        .avatar { width: 40px; height: 40px; background: #b366ff; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 18px; color: white; }
+        .mail-card { background: #1e2026; border-radius: 4px; overflow: hidden; border: 1px solid #2b3139; }
+        .mail-header { padding: 18px; text-align: center; background: #181a20; color: #f3ba2f; font-weight: 800; letter-spacing: 2px; }
+        .mail-body { padding: 25px 20px; }
+        .mail-btn { display: inline-block; background: #f3ba2f; color: #181a20; text-decoration: none; font-weight: 700; padding: 12px 24px; border-radius: 4px; font-size: 14px; margin-bottom: 20px; }
     </style>
 </head>
 <body>
 
     <div class="phone-canvas">
-        <!-- Top Status Layout Bar -->
+        <!-- ✍️ আইফোনের টাইম, চার্জ এখানে বদলাবেন -->
         <div class="status-bar">
-            <span id="mlTime">6:52</span>
-            <div class="status-right">
-                <span class="net-tag" id="mlNet">4G</span>
-                <span id="mlBatNum">21%</span>
-                <div class="battery-box"><div class="battery-level" id="mlBatFill" style="width: 21%;"></div></div>
+            <span>7:50</span>
+            <div class="bar-right">
+                <span class="net-tag">4G</span>
+                <span>25%</span>
+                <div class="bat-box"><div class="bat-fill" style="width: 25%;"></div></div>
             </div>
         </div>
 
-        <!-- Action Items Top Gmail Row Toolbar Component -->
-        <div class="gmail-action-bar">
-            <div class="gmail-left-nav"><span style="cursor:pointer;">←</span></div>
-            <div class="gmail-right-icons"><span>📥</span> <span>🗑</span> <span>✉</span> <span>⋮</span></div>
-        </div>
-
-        <div class="mail-inner-content-padding">
-            <!-- Headline Header Title Subject Element Block -->
-            <div class="mail-subject-headline">
-                <div>[Binance] USDT Deposit Confirmed - <span id="mSubDate">2025-04-04</span> <span id="mSubTime">10:43:12</span>(UTC)</div>
-                <span style="font-size:16px; color:#848e9c;">☆</span>
-            </div>
-
-            <!-- Profile Info Metadata Sender Card Header Section -->
-            <div class="sender-meta-row">
-                <div class="sender-left">
-                    <div class="sender-avatar-circle">B</div>
-                    <div>
-                        <div class="sender-name-title">Binance <span style="font-size:12px; color:#848e9c; font-weight:400;">Today</span></div>
-                        <div class="sender-to-label">to me ▾</div>
-                    </div>
-                </div>
-                <div class="sender-right-actions"><span>☺</span> <span>↩</span> <span>⋮</span></div>
-            </div>
-
-            <!-- Official Embedded Card Component Body Inner Core Wrapper -->
-            <div class="binance-official-mail-card">
-                <div class="binance-header-branding">
-                    <div class="binance-logo-svg">🔶 BINANCE</div>
-                </div>
-                <div class="mail-body-wrapper-block">
-                    <div class="msg-heading-title">USDT Deposit Successful</div>
-                    <div class="msg-core-paragraph">
-                        Your deposit of <span id="mCoreAmt" style="font-weight:700; color:#ffffff;">773.49665</span> USDT is now available in your Binance account. Log in to check your balance. Read our <span style="color:#f3ba2f; text-decoration:underline;">FAQs</span> if you are running into problems.
-                    </div>
-                    <a href="crypto-wallet.html" class="action-button-link-yellow">Visit Your Dashboard</a>
-                    
-                    <div class="warning-footer-note">
-                        Don't recognize this activity? Please <span style="text-decoration:underline;">reset your password</span> and contact customer support immediately.
-                    </div>
-                </div>
-            </div>
+        <div class="gmail-bar"><div>←</div><div style="display:flex; gap:22px; font-size:16px;"><span>📥</span> <span>🗑</span> <span>✉</span> <span>⋮</span></div></div>
+        
+        <div class="mail-padding">
+            <!-- ✍️ ইমেইল টাইটেল ডেট এখানে বদলাবেন -->
+            <div class="subject">[Binance] USDT Deposit Confirmed - 2025-04-04 10:43:12 (UTC)</div>
             
-            <p style="font-size:11px; color:#474d57; text-align:center; margin-top:25px; line-height:1.4;">This is an automated message, please do not reply.</p>
-        </div>
+            <div class="sender-row">
+                <div style="display:flex; gap:12px; align-items:center;">
+                    <div class="avatar">B</div>
+                    <div><div style="font-size:15px; font-weight:600;">Binance <span style="font-size:12px; color:#848e9c; font-weight:400;">Today</span></div><div style="font-size:13px; color:#848e9c; margin-top:2px;">to me ▾</div></div>
+                </div>
+                <div style="display:flex; gap:20px; color:#848e9c; font-size:14px;"><span>☺</span> <span>↩</span> <span>⋮</span></div>
+            </div>
 
-        <!-- Footer Action Quick Shortcuts Reply Options Buttons Layout row -->
-        <div class="mail-reply-bottom-action-bar">
-            <div>Reply</div>
-            <div>Reply all</div>
-            <div>Forward</div>
+            <div class="mail-card">
+                <div class="mail-header">🔶 BINANCE</div>
+                <div class="mail-body">
+                    <div style="font-size:20px; font-weight:700; margin-bottom:20px;">USDT Deposit Successful</div>
+                    <!-- ✍️ ডিপোজিট ডলারের পরিমাণ এখানে বদলাবেন -->
+                    <div style="font-size:14px; color:#eaecef; line-height:1.6; margin-bottom:30px;">Your deposit of <span style="font-weight:700; color:#ffffff;">20,000.00</span> USDT is now available in your Binance account. Log in to check your balance.</div>
+                    <div class="mail-btn">Visit Your Dashboard</div>
+                </div>
+            </div>
         </div>
     </div>
 
-    <script>
-        window.onload = function() {
-            document.getElementById('mlTime').innerText = localStorage.getItem('p_time') || '6:52';
-            document.getElementById('mlNet').innerText = localStorage.getItem('p_net') || '4G';
-            var bat = localStorage.getItem('p_bat') || '21';
-            document.getElementById('mlBatNum').innerText = bat + "%";
-            document.getElementById('mlBatFill').style.width = bat + "%";
-            
-            document.getElementById('mSubDate').innerText = localStorage.getItem('e_tdate') || '2025-04-04';
-            document.getElementById('mSubTime').innerText = localStorage.getItem('e_ttime') || '10:43:12';
-            document.getElementById('mCoreAmt').innerText = localStorage.getItem('e_amt') || '773.49665';
-        }
-    </script>
 </body>
 </html>
