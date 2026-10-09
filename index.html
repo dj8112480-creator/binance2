@@ -3,64 +3,135 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Binance Original Look Simulator</title>
+    <title>Binance Ultimate Multi-Controller</title>
     <style>
-        body { font-family: -apple-system, BlinkMacSystemFont, Arial, sans-serif; background-color: #181a20; color: #eaecef; text-align: center; padding: 20px 15px; }
-        h1 { color: #f3ba2f; font-size: 24px; margin-bottom: 5px; }
-        .control-container { background: #2b3139; padding: 20px; border-radius: 12px; max-width: 420px; margin: 15px auto; text-align: left; box-shadow: 0 4px 15px rgba(0,0,0,0.4); }
-        .form-group { margin-bottom: 12px; }
-        label { display: block; margin-bottom: 6px; font-weight: bold; color: #848e9c; font-size: 14px; }
-        input, select { width: 94%; padding: 10px; border-radius: 6px; border: 1px solid #474f59; background: #1e2026; color: white; font-size: 15px; }
-        button { width: 100%; padding: 12px; background: #f3ba2f; color: #181a20; border: none; border-radius: 6px; font-size: 16px; font-weight: bold; cursor: pointer; margin-top: 10px; }
+        body { font-family: -apple-system, BlinkMacSystemFont, Arial, sans-serif; background-color: #181a20; color: #eaecef; padding: 20px 15px; margin: 0; }
+        h1 { color: #f3ba2f; text-align: center; font-size: 22px; }
+        .panel-container { max-width: 500px; margin: 0 auto; }
+        .section-box { background: #2b3139; padding: 15px; border-radius: 10px; margin-bottom: 15px; border-left: 4px solid #f3ba2f; }
+        .section-title { font-size: 15px; font-weight: bold; color: #f3ba2f; margin-bottom: 10px; border-bottom: 1px solid #474f59; padding-bottom: 5px; }
+        .form-group { margin-bottom: 10px; display: flex; flex-direction: column; }
+        label { font-size: 13px; color: #848e9c; margin-bottom: 4px; font-weight: 500; }
+        input, select { padding: 8px 10px; border-radius: 6px; border: 1px solid #474f59; background: #1e2026; color: white; font-size: 14px; }
+        button { width: 100%; padding: 12px; background: #f3ba2f; color: #181a20; border: none; border-radius: 6px; font-size: 15px; font-weight: bold; cursor: pointer; margin-top: 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.2); }
         button:hover { background: #dfa516; }
-        .links { margin-top: 20px; display: flex; flex-direction: column; gap: 10px; align-items: center; }
-        .links a { display: block; width: 90%; max-width: 380px; background: #2b3139; color: #f3ba2f; text-decoration: none; padding: 12px; border-radius: 6px; font-weight: bold; border: 1px solid #f3ba2f; text-align: center; }
+        .links-area { text-align: center; margin-top: 20px; }
+        .links-area a { display: block; background: #2b3139; color: #f3ba2f; text-decoration: none; padding: 12px; margin: 8px auto; border-radius: 6px; font-weight: bold; border: 1px solid #f3ba2f; max-width: 400px; }
     </style>
 </head>
 <body>
 
-    <h1>Binance Core Engine</h1>
-    <p>Enter details and click Submit, then open any page below to see the official look:</p>
+    <h1>Binance Clone Multi-Engine</h1>
+    <div class="panel-container">
+        
+        <!-- iPhone Status Bar Control -->
+        <div class="section-box">
+            <div class="section-title">📱 iPhone Top Status Bar Settings</div>
+            <div class="form-group">
+                <label>iPhone Time (e.g., 6:30):</label>
+                <input type="text" id="phoneTime" placeholder="6:30">
+            </div>
+            <div class="form-group">
+                <label>Network Signal & Type (e.g., 4G, 5G, LTE):</label>
+                <input type="text" id="netType" placeholder="4G">
+            </div>
+            <div class="form-group">
+                <label>Battery Percentage (%):</label>
+                <input type="number" id="batPct" placeholder="21">
+            </div>
+        </div>
 
-    <div class="control-container">
-        <div class="form-group">
-            <label>Amount (USDT) - For All Pages:</label>
-            <input type="text" id="amountInput" placeholder="Ex: 500.00">
+        <!-- 1st SS & 4th SS: Web3 Wallet Settings -->
+        <div class="section-box">
+            <div class="section-title">💰 1. Web3 Wallet Balance settings</div>
+            <div class="form-group">
+                <label>Wallet Name (e.g., John's Wallet):</label>
+                <input type="text" id="walletName" placeholder="John's Wallet">
+            </div>
+            <div class="form-group">
+                <label>Total Balance Amount (USD):</label>
+                <input type="text" id="walletBal" placeholder="42,203.19">
+            </div>
         </div>
-        <div class="form-group">
-            <label>Phone Battery (%):</label>
-            <input type="number" id="batteryInput" placeholder="Ex: 85">
-        </div>
-        <div class="form-group">
-            <label>Network Status:</label>
-            <select id="networkInput">
-                <option value="5G">5G</option>
-                <option value="4G">4G</option>
-                <option value="LTE">LTE</option>
-                <option value="Wi-Fi">Wi-Fi</option>
-            </select>
-        </div>
-        <button onclick="updateSystem()">Submit & Save</button>
-    </div>
 
-    <div class="links">
-        <a href="withdrawal-details.html" target="_blank">📤 1. Withdrawal Submitted Screen</a>
-        <a href="withdrawal-details (1).html" target="_blank">📑 2. Withdrawal Details View</a>
-        <a href="binance-deposit-email.html" target="_blank">📩 3. In-App Deposit Message</a>
-        <a href="crypto-wallet.html" target="_blank">💰 4. Original Spot Wallet</a>
+        <!-- 2nd SS: Email Message Settings -->
+        <div class="section-box">
+            <div class="section-title">📩 2. Deposit Email Notification Settings</div>
+            <div class="form-group">
+                <label>Email Title Date (e.g., 2025-04-04):</label>
+                <input type="text" id="emailTitleDate" placeholder="2025-04-04">
+            </div>
+            <div class="form-group">
+                <label>Email Title Time (e.g., 10:43:12):</label>
+                <input type="text" id="emailTitleTime" placeholder="10:43:12">
+            </div>
+            <div class="form-group">
+                <label>Deposited USDT Amount:</label>
+                <input type="text" id="emailAmt" placeholder="773.49665">
+            </div>
+        </div>
+
+        <!-- 3rd SS: Withdrawal Details Settings -->
+        <div class="section-box">
+            <div class="section-title">📤 3. Withdrawal Details Layout Settings</div>
+            <div class="form-group">
+                <label>Withdraw Amount (With minus sign, e.g., -98.5):</label>
+                <input type="text" id="withAmt" placeholder="-98.5">
+            </div>
+            <div class="form-group">
+                <label>Display Total Amount (e.g., 100 USDT):</label>
+                <input type="text" id="withTotalAmt" placeholder="100 USDT">
+            </div>
+            <div class="form-group">
+                <label>Withdrawal History Date & Time:</label>
+                <input type="text" id="withDate" placeholder="2026-08-09 19:45:21">
+            </div>
+        </div>
+
+        <button onclick="saveAllSettings()">Apply & Synchronize Everything</button>
+
+        <div class="links-area">
+            <a href="crypto-wallet.html" target="_blank">🗂️ 1. Open Web3 Crypto Wallet Screen</a>
+            <a href="binance-deposit-email.html" target="_blank">📬 2. Open Custom Deposit Email Screen</a>
+            <a href="withdrawal-details.html" target="_blank">📤 3. Open Custom Withdrawal Screen</a>
+        </div>
     </div>
 
     <script>
         window.onload = function() {
-            document.getElementById('amountInput').value = localStorage.getItem('b_amount') || '500.00';
-            document.getElementById('batteryInput').value = localStorage.getItem('b_battery') || '85';
-            document.getElementById('networkInput').value = localStorage.getItem('b_net') || '4G';
+            document.getElementById('phoneTime').value = localStorage.getItem('p_time') || '6:30';
+            document.getElementById('netType').value = localStorage.getItem('p_net') || '4G';
+            document.getElementById('batPct').value = localStorage.getItem('p_bat') || '21';
+            
+            document.getElementById('walletName').value = localStorage.getItem('w_name') || "John's Wallet";
+            document.getElementById('walletBal').value = localStorage.getItem('w_bal') || '42,203.19';
+            
+            document.getElementById('emailTitleDate').value = localStorage.getItem('e_tdate') || '2025-04-04';
+            document.getElementById('emailTitleTime').value = localStorage.getItem('e_ttime') || '10:43:12';
+            document.getElementById('emailAmt').value = localStorage.getItem('e_amt') || '773.49665';
+            
+            document.getElementById('withAmt').value = localStorage.getItem('wt_amt') || '-98.5';
+            document.getElementById('withTotalAmt').value = localStorage.getItem('wt_tamt') || '100 USDT';
+            document.getElementById('withDate').value = localStorage.getItem('wt_date') || '2026-08-09 19:45:21';
         }
-        function updateSystem() {
-            localStorage.setItem('b_amount', document.getElementById('amountInput').value);
-            localStorage.setItem('b_battery', document.getElementById('batteryInput').value);
-            localStorage.setItem('b_net', document.getElementById('networkInput').value);
-            alert("All pages have been successfully updated to original look!");
+
+        function saveAllSettings() {
+            localStorage.setItem('p_time', document.getElementById('phoneTime').value);
+            localStorage.setItem('p_net', document.getElementById('netType').value);
+            localStorage.setItem('p_bat', document.getElementById('batPct').value);
+            
+            localStorage.setItem('w_name', document.getElementById('walletName').value);
+            localStorage.setItem('w_bal', document.getElementById('walletBal').value);
+            
+            localStorage.setItem('e_tdate', document.getElementById('emailTitleDate').value);
+            localStorage.setItem('e_ttime', document.getElementById('emailTitleTime').value);
+            localStorage.setItem('e_amt', document.getElementById('emailAmt').value);
+            
+            localStorage.setItem('wt_amt', document.getElementById('withAmt').value);
+            localStorage.setItem('wt_tamt', document.getElementById('withTotalAmt').value);
+            localStorage.setItem('wt_date', document.getElementById('withDate').value);
+            
+            alert("All interface database values saved successfully!");
         }
     </script>
 </body>
