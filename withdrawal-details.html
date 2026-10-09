@@ -6,50 +6,52 @@
     <title>Withdrawal Details</title>
     <style>
         body { font-family: -apple-system, BlinkMacSystemFont, Arial, sans-serif; background-color: #121214; color: #ffffff; margin: 0; padding: 0; display: flex; flex-direction: column; align-items: center; }
-        .phone-canvas { width: 100%; max-width: 412px; min-height: 100vh; background-color: #181a20; display: flex; flex-direction: column; box-shadow: 0 0 20px rgba(0,0,0,0.8); }
-        .status-bar { height: 36px; display: flex; justify-content: space-between; align-items: center; padding: 0 20px; font-size: 14px; font-weight: 600; color: #ffffff; background: #181a20; }
+        .phone { width: 100%; max-width: 412px; min-height: 100vh; background-color: #181a20; display: flex; flex-direction: column; box-shadow: 0 0 20px rgba(0,0,0,0.8); }
+        .status-bar { height: 36px; display: flex; justify-content: space-between; align-items: center; padding: 0 20px; font-size: 14px; font-weight: 600; color: #ffffff; }
         .bar-right { display: flex; align-items: center; gap: 5px; }
         .net-badge { font-size: 10px; background: #ffffff; color: #000000; padding: 1px 3px; border-radius: 3px; font-weight: bold; }
         .bat-shell { width: 22px; height: 11px; border: 1px solid #ffffff; border-radius: 3px; display: flex; align-items: center; padding: 1px; }
-        .bat-fill { height: 100%; background-color: #ffffff; border-radius: 1px; }
-        .header-bar { padding: 12px 16px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #2b3139; }
-        .hero-section { text-align: center; padding: 25px 16px; }
-        .hero-amt { font-size: 32px; font-weight: 700; color: #ffffff; margin-bottom: 6px; }
-        .status-pill { color: #0ecb81; font-size: 14px; font-weight: 600; display: flex; align-items: center; justify-content: center; gap: 4px; margin-bottom: 12px; }
-        .data-list { padding: 10px 20px; flex-grow: 1; }
-        .data-row { display: flex; justify-content: space-between; padding: 14px 0; border-bottom: 1px solid #2b3139; font-size: 14px; }
-        .btn-footer { display: block; text-align: center; background: #f3ba2f; color: #181a20; font-weight: 700; text-decoration: none; padding: 14px; border-radius: 8px; font-size: 15px; margin: 25px 20px; }
+        .bat-fill { height: 100%; background-color: #ffffff; border-radius: 1px; width: 21%; }
+        .header-bar { padding: 14px 16px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #2b3139; font-size: 16px; font-weight: 500; }
+        .hero-section { text-align: center; padding: 28px 16px 20px 16px; }
+        .hero-amt { font-size: 30px; font-weight: 700; color: #ffffff; margin-bottom: 6px; }
+        .status-pill { color: #0ecb81; font-size: 13.5px; font-weight: 600; display: flex; align-items: center; justify-content: center; gap: 4px; margin-bottom: 12px; }
+        .data-list { padding: 5px 16px; flex-grow: 1; }
+        .data-row { display: flex; justify-content: space-between; padding: 15px 0; border-bottom: 1px solid #2b3139; font-size: 13.5px; }
+        .lbl { color: #848e9c; }
+        .val { color: #ffffff; font-weight: 500; text-align: right; }
+        .btn-footer { display: block; text-align: center; background: #f3ba2f; color: #181a20; font-weight: 700; text-decoration: none; padding: 13px; border-radius: 6px; font-size: 14px; margin: 30px 16px; }
     </style>
 </head>
 <body>
 
-    <div class="phone-canvas">
-        <!-- ✍️ আইফোনের টাইম, চার্জ এখানে বদলাবেন -->
+    <div class="phone">
+        <!-- ✍️ আইফোনের টাইম ও চার্জ এখানে বদলাবেন -->
         <div class="status-bar">
-            <span>7:50</span>
+            <span>6:54</span>
             <div class="bar-right">
                 <span class="net-badge">4G</span>
-                <span>25%</span>
-                <div class="bat-shell"><div class="bat-fill" style="width: 25%;"></div></div>
+                <span>21%</span>
+                <div class="bat-shell"><div class="bat-fill"></div></div>
             </div>
         </div>
 
-        <div class="header-bar"><span>←</span><span style="font-size:17px; font-weight:700;">Withdrawal Details</span><span style="visibility:hidden;">→</span></div>
+        <div class="header-bar"><span>←</span><span>Withdrawal Details</span><span style="visibility:hidden;">→</span></div>
         
         <div class="hero-section">
-            <!-- ✍️ মেইন বড় মাইনাস অ্যামাউন্ট এখানে বদলাবেন -->
-            <div class="hero-amt" id="vWithHeroAmt">-20,000.00 USDT</div>
+            <!-- ✍️ উইথড্রয়াল মাইনাস ডলার এখানে বদলাবেন -->
+            <div class="hero-amt">-98.5 USDT</div>
             <div class="status-pill">✓ Completed</div>
-            <div style="color:#848e9c; font-size:12px; line-height:1.5; padding:0 15px;">Crypto transferred out of Binance. Please contact the recipient platform for your receipt.</div>
+            <div style="color:#848e9c; font-size:12px; line-height:1.5; padding:0 15px;">Crypto transferred out of Binance. Please contact the recipient platform for your transaction receipt.</div>
         </div>
 
         <div class="data-list">
-            <div class="data-row"><span style="color:#848e9c;">Network</span><span>TRX</span></div>
-            <div class="data-row"><span style="color:#848e9c;">Address</span><span style="font-family:monospace; text-align:right;">TX7afK9RjMvC5zHqE7bHn2C6eK5d4cfr... 📋</span></div>
-            <!-- ✍️ নিচে ডাবল কনফার্মেশন অ্যামাউন্ট এবং ডেট বদলাবেন -->
-            <div class="data-row"><span style="color:#848e9c;">Amount</span><span>20,000.00 USDT</span></div>
-            <div class="data-row"><span style="color:#848e9c;">Network fee</span><span>1.5 TRX</span></div>
-            <div class="data-row"><span style="color:#848e9c;">Date</span><span>2026-08-09 19:45:21</span></div>
+            <div class="data-row"><span class="lbl">Network</span><span class="val">TRX</span></div>
+            <div class="data-row"><span class="lbl">Address</span><span class="val" style="font-family:monospace; font-size:13px;">TX7afK9RjMvC5zHqE7bHn2C6eK5d4cfr... 📋</span></div>
+            <!-- ✍️ নিচে টোটাল অ্যামাউন্ট ও ডেট বদলাবেন -->
+            <div class="data-row"><span class="lbl">Amount</span><span class="val">100 USDT</span></div>
+            <div class="data-row"><span class="lbl">Network fee</span><span class="val">1.5 TRX</span></div>
+            <div class="data-row"><span class="lbl">Date</span><span class="val">2026-08-09 19:45:21</span></div>
         </div>
         <div class="btn-footer">Withdraw Again</div>
     </div>
