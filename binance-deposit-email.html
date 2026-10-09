@@ -3,64 +3,69 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Email Notification</title>
+    <title>Email Notification View</title>
     <style>
         body { font-family: -apple-system, BlinkMacSystemFont, Arial, sans-serif; background-color: #121214; color: #ffffff; margin: 0; padding: 0; display: flex; flex-direction: column; align-items: center; }
-        .phone { width: 100%; max-width: 412px; min-height: 100vh; background-color: #121214; display: flex; flex-direction: column; box-shadow: 0 0 20px rgba(0,0,0,0.6); }
+        .phone-canvas { width: 100%; max-width: 412px; min-height: 100vh; background-color: #121214; display: flex; flex-direction: column; box-shadow: 0 0 20px rgba(0,0,0,0.6); }
         .status-bar { height: 36px; display: flex; justify-content: space-between; align-items: center; padding: 0 20px; font-size: 14px; font-weight: 600; color: #ffffff; }
-        .bar-right { display: flex; align-items: center; gap: 5px; }
+        .status-right { display: flex; align-items: center; gap: 5px; }
         .net-tag { font-size: 10px; background: #ffffff; color: #000000; padding: 1px 3px; border-radius: 3px; font-weight: bold; }
-        .bat-box { width: 22px; height: 11px; border: 1px solid #ffffff; border-radius: 3px; display: flex; align-items: center; padding: 1px; }
-        .bat-fill { height: 100%; background-color: #ffffff; border-radius: 1px; width: 21%; }
-        .gmail-bar { padding: 15px; display: flex; justify-content: space-between; align-items: center; font-size: 18px; }
-        .mail-padding { padding: 10px 16px; }
-        .subject { font-size: 19px; font-weight: 450; color: #ffffff; line-height: 1.4; margin-bottom: 20px; }
-        .sender-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 25px; }
-        .avatar { width: 38px; height: 38px; background: #b366ff; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 16px; color: white; }
-        .mail-card { background: #1e2026; border-radius: 4px; overflow: hidden; border: 1px solid #2b3139; }
-        .mail-header { padding: 18px; text-align: center; background: #181a20; color: #f3ba2f; font-weight: 800; font-size: 17px; letter-spacing: 1.5px; }
-        .mail-body { padding: 25px 20px; }
-        .mail-btn { display: inline-block; background: #f3ba2f; color: #181a20; text-decoration: none; font-weight: 700; padding: 12px 24px; border-radius: 4px; font-size: 13.5px; margin-bottom: 20px; }
+        .battery-box { width: 22px; height: 11px; border: 1px solid #ffffff; border-radius: 3px; display: flex; align-items: center; padding: 1px; }
+        .battery-level { height: 100%; background-color: #ffffff; border-radius: 1px; }
+        .gmail-action-bar { padding: 15px; display: flex; justify-content: space-between; align-items: center; font-size: 18px; }
+        .mail-inner-content-padding { padding: 15px 20px; flex-grow: 1; }
+        .mail-subject-headline { font-size: 19px; font-weight: 500; color: #ffffff; line-height: 1.4; margin-bottom: 20px; }
+        .sender-meta-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 25px; }
+        .sender-avatar-circle { width: 38px; height: 38px; background: #b366ff; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 16px; color: white; }
+        .binance-official-mail-card { background: #1e2026; border-radius: 4px; overflow: hidden; border: 1px solid #2b3139; }
+        .binance-header-branding { padding: 18px; text-align: center; border-bottom: 1px solid #2b3139; background: #181a20; color: #f3ba2f; font-weight: 800; font-size: 17px; letter-spacing: 1.5px; }
+        .mail-body-wrapper-block { padding: 25px 20px; background: #1e2026; }
+        .action-button-link-yellow { display: inline-block; background: #f3ba2f; color: #181a20; text-decoration: none; font-weight: 700; padding: 12px 24px; border-radius: 4px; font-size: 13.5px; margin-bottom: 20px; }
     </style>
 </head>
 <body>
-
-    <div class="phone">
-        <!-- ✍️ আইফোনের টাইম ও চার্জ এখানে বদলাবেন -->
+    <div class="phone-canvas">
         <div class="status-bar">
-            <span>6:52</span>
-            <div class="bar-right">
-                <span class="net-tag">4G</span>
-                <span>21%</span>
-                <div class="bat-box"><div class="bat-fill"></div></div>
+            <span id="mlTime">6:52</span>
+            <div class="status-right">
+                <span class="net-tag" id="mlNet">4G</span>
+                <span id="mlBatNum">21%</span>
+                <div class="battery-box"><div class="battery-level" id="mlBatFill"></div></div>
             </div>
         </div>
-
-        <div class="gmail-bar"><div>←</div><div style="display:flex; gap:22px; font-size:16px;"><span>📥</span> <span>🗑</span> <span>✉</span> <span>⋮</span></div></div>
-        
-        <div class="mail-padding">
-            <!-- ✍️ ইমেইলের তারিখ ও সময় এখানে বদলাবেন -->
-            <div class="subject">[Binance] USDT Deposit Confirmed - 2025-04-04 10:43:12 (UTC)</div>
-            
-            <div class="sender-row">
+        <div class="gmail-action-bar"><div>←</div><div style="display:flex; gap:22px; font-size:16px;"><span>📥</span> <span>🗑</span> <span>✉</span> <span>⋮</span></div></div>
+        <div class="mail-inner-content-padding">
+            <div class="mail-subject-headline">[Binance] USDT Deposit Confirmed - <span id="mSubDateTime">2025-04-04 10:43:12</span> (UTC)</div>
+            <div class="sender-meta-row">
                 <div style="display:flex; gap:12px; align-items:center;">
-                    <div class="avatar">B</div>
-                    <div><div style="font-size:15px; font-weight:600;">Binance <span style="font-size:12px; color:#848e9c; font-weight:400;">Today</span></div><div style="font-size:13px; color:#848e9c; margin-top:2px;">to me ▾</div></div>
+                    <div class="sender-avatar-circle">B</div>
+                    <div>
+                        <div style="font-size:15px; font-weight:600;">Binance <span style="font-size:12px; color:#848e9c; font-weight:400;">Today</span></div>
+                        <div style="font-size:13px; color:#848e9c; margin-top:2px;">to me ▾</div>
+                    </div>
                 </div>
                 <div style="display:flex; gap:20px; color:#848e9c; font-size:14px;"><span>☺</span> <span>↩</span> <span>⋮</span></div>
             </div>
-
-            <div class="mail-card">
-                <div class="mail-header">🔶 BINANCE</div>
-                <div class="mail-body">
-                    <div style="font-size:20px; font-weight:700; margin-bottom:20px;">USDT Deposit Successful</div>
-                    <!-- ✍️ ইমেইলের ভেতরের ডলারের পরিমাণ এখানে বদলাবেন -->
-                    <div style="font-size:14px; color:#eaecef; line-height:1.6; margin-bottom:30px;">Your deposit of <span style="font-weight:700; color:#ffffff;">773.49665</span> USDT is now available in your Binance account. Log in to check your balance.</div>
-                    <div class="mail-btn">Visit Your Dashboard</div>
+            <div class="binance-official-mail-card">
+                <div class="binance-header-branding">🔶 BINANCE</div>
+                <div class="mail-body-wrapper-block">
+                    <div style="font-size:19px; font-weight:700; margin-bottom:18px;">USDT Deposit Successful</div>
+                    <div style="font-size:14px; color:#eaecef; line-height:1.5; margin-bottom:25px;">Your deposit of <span id="mCoreAmt" style="font-weight:700; color:#ffffff;">773.49665</span> USDT is now available in your Binance account. Log in to check your balance.</div>
+                    <div class="action-button-link-yellow">Visit Your Dashboard</div>
                 </div>
             </div>
         </div>
     </div>
-
+    <script>
+        window.onload = function() {
+            document.getElementById('mlTime').innerText = localStorage.getItem('p_time') || '6:52';
+            document.getElementById('mlNet').innerText = localStorage.getItem('p_net') || '4G';
+            var bat = localStorage.getItem('p_bat') || '21';
+            document.getElementById('mlBatNum').innerText = bat + "%";
+            document.getElementById('mlBatFill').style.width = bat + "%";
+            document.getElementById('mSubDateTime').innerText = localStorage.getItem('e_datetime') || '2025-04-04 10:43:12';
+            document.getElementById('mCoreAmt').innerText = localStorage.getItem('e_amt') || '773.49665';
+        }
+    </script>
 </body>
 </html>
