@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Withdrawal Details</title>
+    <style>
+        body { font-family: -apple-system, BlinkMacSystemFont, Arial, sans-serif; background-color: #121214; color: #eaecef; margin: 0; padding: 0; display: flex; flex-direction: column; align-items: center; }
+        .phone-canvas { width: 100%; max-width: 412px; min-height: 100vh; background-color: #181a20; display: flex; flex-direction: column; }
+        .status-bar { height: 32px; background-color: #181a20; display: flex; justify-content: space-between; align-items: center; padding: 0 16px; font-size: 13px; }
+        .status-right { display: flex; align-items: center; gap: 6px; }
+        .battery-icon { width: 22px; height: 11px; border: 1px solid #848e9c; border-radius: 3px; position: relative; display: flex; align-items: center; padding: 1px; }
+        .battery-level { height: 100%; background-color: #eaecef; border-radius: 1px; }
+        .app-header { padding: 15px; display: flex; align-items: center; font-size: 16px; font-weight: 600; border-bottom: 1px solid #2b3139; }
+        .app-header a { color: white; text-decoration: none; margin-right: 20px; }
+        .amount-section { text-align: center; padding: 30px 0 20px 0; }
+        .amount-num { font-size: 34px; font-weight: 700; color: #ffffff; }
+        .coin { font-size: 16px; color: #f3ba2f; margin-left: 6px; font-weight: bold; }
+        .status-badge { display: inline-block; background: rgba(14, 203, 129, 0.1); color: #0ecb81; font-size: 12px; font-weight: 600; padding: 4px 10px; border-radius: 4px; margin-top: 8px; }
+        .details-list { padding: 10px 20px; flex-grow: 1; }
+        .row-item { display: flex; justify-content: space-between; padding: 16px 0; border-bottom: 1px solid #2b3139; font-size: 13px; }
+        .lbl { color: #848e9c; }
+        .val { color: #ffffff; font-weight: 500; text-align: right; }
+    </style>
+</head>
+<body>
+    <div class="phone-canvas">
+        <div class="status-bar">
+            <span class="time">09:41</span>
+            <div class="status-right">
+                <span class="net">4G</span> <span class="bat-num">85%</span>
+                <div class="battery-icon"><div class="battery-level"></div></div>
+            </div>
+        </div>
+        <div class="app-header"><a href="index.html">←</a><span>Withdrawal Details</span></div>
+        
+        <div class="amount-section">
+            <div><span class="amount-num" id="detAmount">500.00</span><span class="coin">USDT</span></div>
+            <div class="status-badge">Completed</div>
+        </div>
+
+        <div class="details-list">
+            <div class="row-item"><span class="lbl">Date</span><span id="detDate" class="val">2026-10-09 17:45:12</span></div>
+            <div class="row-item"><span class="lbl">Network</span><span class="val">TRX (TRC20)</span></div>
+            <div class="row-item"><span class="lbl">Address</span><span class="val" style="font-family: monospace;">TUp9xG...7zK2wL</span></div>
+            <div class="row-item"><span class="lbl">TxID</span><span class="val" style="font-family: monospace; font-size: 11px; color: #848e9c; max-width: 200px; word-break: break-all;">6f70a48b...8d9e2c4f</span></div>
+        </div>
+    </div>
+    <script>
+        window.onload = function() {
+            let now = new Date();
+            document.querySelector('.time').innerText = now.getHours().toString().padStart(2, '0') + ":" + now.getMinutes().toString().padStart(2, '0');
+            let amt = localStorage.getItem('b_amount') || '500.00';
+            let bat = localStorage.getItem('b_battery') || '85';
+            let net = localStorage.getItem('b_net') || '4G';
+            document.getElementById('detAmount').innerText = parseFloat(amt).toFixed(2);
+            document.getElementById('detDate').innerText = now.toISOString().slice(0,10) + " " + now.toTimeString().slice(0,8);
+            document.querySelector('.bat-num').innerText = bat + "%";
+            document.querySelector('.battery-level').style.width = bat + "%";
+            document.querySelector('.net').innerText = (net === 'Wi-Fi') ? "📶" : net;
+        }
+    </script>
+</body>
+</html>
