@@ -3,151 +3,129 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Binance Simulator Pro Engine</title>
+    <title>Binance Simulator Ultimate AIO Engine</title>
     <style>
         * { box-sizing: border-box; }
         body { font-family: -apple-system, BlinkMacSystemFont, Arial, sans-serif; background-color: #181a20; color: #eaecef; padding: 20px 10px; margin: 0; display: flex; flex-direction: column; align-items: center; }
-        h1 { color: #f3ba2f; font-size: 22px; text-align: center; margin-bottom: 20px; }
+        h1 { color: #f3ba2f; font-size: 24px; text-align: center; margin-bottom: 5px; }
+        .subtitle { font-size: 13px; color: #848e9c; text-align: center; margin-bottom: 25px; }
         
-        .setup-panel { width: 100%; max-width: 412px; background: #2b3139; padding: 20px; border-radius: 12px; border-left: 4px solid #f3ba2f; box-shadow: 0 4px 15px rgba(0,0,0,0.3); }
-        .section-title { font-size: 14px; font-weight: bold; color: #f3ba2f; margin-bottom: 12px; border-bottom: 1px solid #474f59; padding-bottom: 5px; text-transform: uppercase; }
+        /* Central Parameter Input Panel */
+        .setup-panel { width: 100%; max-width: 412px; background: #2b3139; padding: 20px; border-radius: 12px; border-left: 4px solid #f3ba2f; box-shadow: 0 4px 15px rgba(0,0,0,0.3); margin-bottom: 30px; }
+        .section-title { font-size: 14px; font-weight: bold; color: #f3ba2f; margin-bottom: 15px; border-bottom: 1px solid #474f59; padding-bottom: 6px; text-transform: uppercase; }
         .form-group { margin-bottom: 12px; display: flex; flex-direction: column; }
         label { font-size: 12px; color: #848e9c; margin-bottom: 5px; font-weight: 500; }
-        input { padding: 10px; border-radius: 6px; border: 1px solid #474f59; background: #1e2026; color: white; font-size: 14px; }
+        input, select { padding: 10px; border-radius: 6px; border: 1px solid #474f59; background: #1e2026; color: white; font-size: 14px; }
         
-        .action-btn { width: 100%; padding: 14px; background: #0ecb81; color: #ffffff; border: none; border-radius: 6px; font-size: 15px; font-weight: bold; cursor: pointer; margin-top: 10px; transition: background 0.2s; }
-        .action-btn:hover { background: #0b9a62; }
+        .action-btn { width: 100%; padding: 14px; background: #f3ba2f; color: #181a20; border: none; border-radius: 6px; font-size: 15px; font-weight: bold; cursor: pointer; margin-top: 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.2); transition: background 0.2s; }
+        .action-btn:hover { background: #dfa516; }
         
-        /* Realistic Phone Frame View Container */
-        .preview-wrapper { width: 100%; max-width: 412px; margin-top: 30px; display: none; background: #ffffff; color: #000000; border-radius: 16px; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.5); position: relative; border: 1px solid #eaecef; }
+        /* View Selection Mode Buttons */
+        .mode-selector-tabs { display: flex; width: 100%; max-width: 412px; background: #2b3139; padding: 4px; border-radius: 8px; margin-bottom: 20px; }
+        .mode-tab-btn { flex: 1; padding: 10px; font-size: 13px; font-weight: bold; text-align: center; border-radius: 6px; cursor: pointer; color: #848e9c; transition: all 0.2s; }
+        .mode-tab-active { background: #f3ba2f; color: #181a20; }
         
-        /* iPhone Top Bar Status Layer */
-        .iphone-top-status-bar { height: 38px; display: flex; justify-content: space-between; align-items: center; padding: 0 20px; font-size: 14px; font-weight: 600; color: #000000; background: #ffffff; }
-        .bar-right-icons { display: flex; align-items: center; gap: 5px; }
-        .net-pill { font-size: 10px; background: #000000; color: #ffffff; padding: 1px 4px; border-radius: 4px; font-weight: bold; }
-        .bat-shell { width: 22px; height: 11px; border: 1px solid #000000; border-radius: 3px; display: flex; align-items: center; padding: 1px; position: relative; }
-        .bat-inside-fill { height: 100%; background: #000000; border-radius: 1px; }
+        /* Output Mockup Screen Display Wrapper (iPhone Frame Dimensions) */
+        .preview-canvas-container { width: 100%; max-width: 412px; background: #ffffff; color: #000000; border-radius: 16px; overflow: hidden; box-shadow: 0 12px 35px rgba(0,0,0,0.6); position: relative; border: 1px solid #eaecef; }
+        
+        /* iPhone Status Bar Custom Display Template Layer */
+        .iphone-status-header-bar { height: 38px; display: flex; justify-content: space-between; align-items: center; padding: 0 20px; font-size: 14px; font-weight: 600; }
+        .iphone-dark-theme-bar { background: #181a20; color: #ffffff; }
+        .iphone-light-theme-bar { background: #ffffff; color: #000000; }
+        .bar-icons-right-side { display: flex; align-items: center; gap: 5px; }
+        .net-badge-pill { font-size: 10px; padding: 1px 4px; border-radius: 4px; font-weight: bold; }
+        .net-pill-dark { background: #ffffff; color: #000000; }
+        .net-pill-light { background: #000000; color: #ffffff; }
+        .bat-shell-container { width: 22px; height: 11px; border-radius: 3px; display: flex; align-items: center; padding: 1px; position: relative; }
+        .bat-shell-dark { border: 1px solid #ffffff; }
+        .bat-shell-light { border: 1px solid #000000; }
+        .bat-fill-level { height: 100%; border-radius: 1px; }
+        .bat-fill-dark { background: #ffffff; }
+        .bat-fill-light { background: #000000; }
 
-        /* Binance App Top Nav Elements */
-        .app-top-nav-bar { display: flex; justify-content: space-between; align-items: center; padding: 10px 16px; background: #ffffff; }
-        .brand-logo-avatar { background: #fcd435; width: 34px; height: 34px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 16px; color: #181a20; }
-        .switch-toggle-pill { display: flex; background: #eaecef; padding: 3px; border-radius: 8px; }
-        .toggle-tab-btn { padding: 6px 14px; font-size: 14px; font-weight: 600; border-radius: 6px; color: #767f8d; }
-        .toggle-tab-active { background: #ffffff; color: #1e2026; }
-        
-        /* Core Summary Wallet Metrics Block */
-        .main-wallet-content-pane { padding: 20px 16px 30px 16px; background: #ffffff; }
-        .name-selector-row { font-size: 14px; font-weight: 600; color: #1e2026; margin-bottom: 6px; display: flex; align-items: center; gap: 4px; }
-        .meta-hex-addr { color: #929aa5; font-size: 12px; font-weight: 400; }
-        .big-crypto-display-balance { font-size: 36px; font-weight: 800; color: #1e2026; margin-bottom: 4px; letter-spacing: -0.5px; }
-        .green-percentage-growth { color: #0ecb81; font-size: 13px; font-weight: 600; }
-        
-        /* Quick Actions Menu Grid */
-        .grid-button-actions-row { display: flex; justify-content: space-between; margin: 25px 0; text-align: center; }
-        .grid-action-node { flex: 1; display: flex; flex-direction: column; align-items: center; gap: 8px; font-size: 13px; font-weight: 500; color: #1e2026; }
-        .node-round-circle-icon { width: 44px; height: 44px; background: #f5f5f5; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 18px; }
-        
-        /* Exclusive Promo Card Box */
-        .airdrop-banner-promo-card { background: #fef8e6; border-radius: 12px; padding: 15px; display: flex; justify-content: space-between; align-items: center; position: relative; margin-bottom: 25px; }
-        .promo-label-tag { font-size: 12px; color: #929aa5; margin-bottom: 4px; }
-        .promo-main-heading { font-size: 14px; font-weight: 700; color: #1e2026; margin-bottom: 6px; }
-        .promo-action-anchor-yellow { color: #dfa516; font-size: 13px; font-weight: 600; text-decoration: none; }
-        
-        /* Asset Tabs Component Section */
-        .tabs-header-group { display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; border-bottom: 2px solid #f5f5f5; padding-bottom: 8px; }
-        .tabs-left-side-nodes { display: flex; gap: 15px; font-size: 16px; font-weight: 700; color: #1e2026; }
-        .node-sub-active { color: #1e2026; border-bottom: 3px solid #fcd435; padding-bottom: 6px; }
-        
-        /* Token Row Item List Row elements */
-        .token-row-item-node { display: flex; justify-content: space-between; align-items: center; padding: 12px 0; }
-        .token-left-meta-info { display: flex; align-items: center; gap: 12px; }
-        .token-icon-avatar-badge { width: 38px; height: 38px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 15px; }
-        .token-symbol-headline-text { font-size: 16px; font-weight: 700; color: #1e2026; }
-        .token-sub-green-percent { font-size: 12px; color: #0ecb81; margin-top: 2px; }
-        .token-right-holding-metrics { text-align: right; }
-        .token-crypto-amount-bold { font-size: 16px; font-weight: 700; color: #1e2026; }
-        .token-fiat-converted-gray-text { font-size: 12px; color: #929aa5; margin-top: 2px; }
+        /* VIEW 1: WEB3 CRYPTO WALLET MOCKUP LOOK */
+        #view-wallet { display: block; }
+        .wallet-nav-header { display: flex; justify-content: space-between; align-items: center; padding: 10px 16px; background: #ffffff; }
+        .wallet-logo-avatar { background: #fcd435; width: 34px; height: 34px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 16px; color: #181a20; }
+        .wallet-switch-toggle { display: flex; background: #eaecef; padding: 3px; border-radius: 8px; }
+        .wallet-toggle-tab { padding: 6px 14px; font-size: 14px; font-weight: 600; border-radius: 6px; color: #767f8d; }
+        .wallet-toggle-active { background: #ffffff; color: #1e2026; }
+        .wallet-main-pane { padding: 20px 16px 30px 16px; background: #ffffff; }
+        .wallet-account-row { font-size: 14px; font-weight: 600; color: #1e2026; margin-bottom: 8px; display: flex; align-items: center; gap: 4px; }
+        .wallet-big-balance { font-size: 36px; font-weight: 800; color: #1e2026; margin-bottom: 4px; letter-spacing: -0.5px; }
+        .wallet-grid-actions { display: flex; justify-content: space-between; margin: 25px 0; text-align: center; }
+        .wallet-grid-node { flex: 1; display: flex; flex-direction: column; align-items: center; gap: 8px; font-size: 13px; font-weight: 500; color: #1e2026; }
+        .wallet-node-circle { width: 44px; height: 44px; background: #f5f5f5; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 18px; }
+        .wallet-promo-banner { background: #fef8e6; border-radius: 12px; padding: 15px; display: flex; justify-content: space-between; align-items: center; margin-bottom: 25px; }
+        .wallet-tabs-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; border-bottom: 2px solid #f5f5f5; padding-bottom: 8px; }
+        .wallet-token-row { display: flex; justify-content: space-between; align-items: center; padding: 12px 0; }
+
+        /* VIEW 2: GMAIL INBOX DEPOSIT EMAIL LOOK */
+        #view-email { display: none; background: #121214; color: #ffffff; min-height: 550px; }
+        .gmail-action-bar { padding: 15px; display: flex; justify-content: space-between; align-items: center; font-size: 18px; }
+        .mail-content-block { padding: 15px 20px; }
+        .mail-subject-title { font-size: 20px; font-weight: 500; color: #ffffff; line-height: 1.4; margin-bottom: 20px; }
+        .mail-sender-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 25px; }
+        .mail-sender-avatar { width: 40px; height: 40px; background: #b366ff; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 18px; color: white; }
+        .binance-mail-card { background: #1e2026; border-radius: 4px; overflow: hidden; border: 1px solid #2b3139; }
+        .binance-mail-header { padding: 18px; text-align: center; border-bottom: 1px solid #2b3139; background: #181a20; color: #f3ba2f; font-weight: 800; letter-spacing: 2px; }
+        .binance-mail-body { padding: 25px 20px; background: #1e2026; }
+        .binance-mail-btn { display: inline-block; background: #f3ba2f; color: #181a20; text-decoration: none; font-weight: 700; padding: 12px 24px; border-radius: 4px; font-size: 14px; margin-bottom: 20px; }
+
+        /* VIEW 3: WITHDRAWAL DETAILS LOOK */
+        #view-withdrawal { display: none; background: #181a20; color: #ffffff; min-height: 550px; }
+        .with-header-bar { padding: 12px 16px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #2b3139; }
+        .with-hero-section { text-align: center; padding: 25px 16px; }
+        .with-hero-amt { font-size: 32px; font-weight: 700; color: #ffffff; margin-bottom: 6px; }
+        .with-status-pill { color: #0ecb81; font-size: 14px; font-weight: 600; display: flex; align-items: center; justify-content: center; gap: 4px; margin-bottom: 12px; }
+        .with-data-list { padding: 10px 20px; }
+        .with-data-row { display: flex; justify-content: space-between; padding: 14px 0; border-bottom: 1px solid #2b3139; font-size: 14px; }
+        .with-btn-footer { display: block; text-align: center; background: #f3ba2f; color: #181a20; font-weight: 700; text-decoration: none; padding: 14px; border-radius: 8px; font-size: 15px; margin: 25px 20px; }
     </style>
 </head>
 <body>
 
-    <h1>Binance Live App Engine</h1>
+    <h1>Binance Core Engine Pro</h1>
+    <div class="subtitle">All-In-One Unified Live Control Simulator Dashboard</div>
     
-    <!-- Top Central Form Control Panel Dashboard Box -->
+    <!-- Unified Central Control Input Panel Form Box -->
     <div class="setup-panel">
-        <div class="section-title">⚙️ App Simulator Parameters</div>
+        <div class="section-title">⚙️ Master Global Variables</div>
         
         <div class="form-group">
-            <label>iPhone System Time (e.g., 7:10):</label>
-            <input type="text" id="inpTime" value="7:10">
+            <label>iPhone System Time Indicator Bar (e.g., 7:50):</label>
+            <input type="text" id="inpTime" value="7:50">
         </div>
         
         <div class="form-group">
-            <label>Battery Level Percentage (%):</label>
+            <label>Battery Capacity Charge Level Percentage (%):</label>
             <input type="number" id="inpBat" value="25" min="1" max="100">
         </div>
-        
+
         <div class="form-group">
-            <label>Wallet Profile Account Name:</label>
-            <input type="text" id="inpName" value="John's Wallet">
+            <label>Network Signal Protocol Connection Type:</label>
+            <select id="inpNet">
+                <option value="5G">5G</option>
+                <option value="4G" selected>4G</option>
+                <option value="LTE">LTE</option>
+                <option value="📶">Wi-Fi Connection</option>
+            </select>
         </div>
         
         <div class="form-group">
-            <label>Total Wallet Balance Amount (USD):</label>
-            <input type="text" id="inpBal" value="2,000.00">
+            <label>Variable Amount Field Value (USDT / USD):</label>
+            <input type="text" id="inpAmt" value="20,000.00">
         </div>
         
-        <button class="action-btn" onclick="generateLiveMockup()">Generate Live Preview Screen</button>
+        <div class="form-group">
+            <label>Deposit Notification Custom Date & Time:</label>
+            <input type="text" id="inpDateTime" value="2025-04-04 10:43:12">
+        </div>
+        
+        <button class="action-btn" onclick="synchronizeUnifiedMockupEngine()">Apply Changes Instantly</button>
     </div>
 
-    <!-- Hidden Output Canvas Container Box (Shows immediately on button click) -->
-    <div class="preview-wrapper" id="previewArea">
-        
-        <!-- Top Status Layer Component Element Row -->
-        <div class="iphone-top-status-bar">
-            <span id="liveTimeText">6:30</span>
-            <div class="bar-right-icons">
-                <span class="net-pill">4G</span>
-                <span id="liveBatNumText">21%</span>
-                <div class="bat-shell">
-                    <div class="bat-inside-fill" id="liveBatFillWidth" style="width: 21%;"></div>
-                </div>
-            </div>
-        </div>
-
-        <!-- In-App Header Nav Toolbar Module -->
-        <div class="app-top-nav-bar">
-            <div class="brand-logo-avatar">🦡</div>
-            <div class="switch-toggle-pill">
-                <div class="toggle-tab-btn">Exchange</div>
-                <div class="toggle-tab-btn toggle-tab-active">Web3</div>
-            </div>
-            <div style="font-size: 18px; color: #1e2026; font-weight: bold; display: flex; gap: 12px;"><span>⛶</span> <span>🔍</span></div>
-        </div>
-
-        <!-- Main Account Dashboard Elements Display Box -->
-        <div class="main-wallet-content-pane">
-            <div class="name-selector-row">
-                <span id="liveWalletNameText">John's Wallet</span> ▾ 
-                <span class="meta-hex-addr">0x78...Gr4P 📋</span>
-            </div>
-            
-            <div class="big-crypto-display-balance">$<span id="liveWalletBalText">42,203.19</span></div>
-            <div class="green-percentage-growth">+0.21%</div>
-
-            <!-- Action Grid Menu Rows Icons Buttons -->
-            <div class="grid-button-actions-row">
-                <div class="grid-action-node"><div class="node-round-circle-icon" style="background:#f5f5f5;">📤</div>Send</div>
-                <div class="grid-action-node"><div class="node-round-circle-icon" style="background:#f5f5f5;">📥</div>Receive</div>
-                <div class="grid-action-node"><div class="node-round-circle-icon" style="background:#f5f5f5;">⇄</div>Transfer</div>
-                <div class="grid-action-node"><div class="node-round-circle-icon" style="background:#f5f5f5;">•••</div>More</div>
-            </div>
-
-            <!-- Promo Banner component block container -->
-            <div class="airdrop-banner-promo-card">
-                <div>
-                    <div class="promo-label-tag">$500,000 Exclusive Airdrop</div>
-                    <div class="promo-main-heading">Swap to win up to 1 BTC</div>
-                    <a href="#" class="promo-action-anchor-yellow">Join Now</a>
-                </div>
-                <div style="font-size: 32px;">🪙</div>
+    <!-- Interface Mode Tab Switch Row Controls -->
+    <div class="mode-selector-tabs">
+        <div class="mode-tab-btn mode-tab-active" id="tab-w" onclick="switchActiveViewDisplay('wallet')">1. Web3 Wallet</div>
+        <div class="mode-tab-btn" id="tab-e" onclick="switchActiveViewDisplay('email')">2. Deposit Email</div>
