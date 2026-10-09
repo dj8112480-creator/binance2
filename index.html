@@ -3,138 +3,151 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Binance Ultimate Multi-Controller</title>
+    <title>Binance Simulator Pro Engine</title>
     <style>
-        body { font-family: -apple-system, BlinkMacSystemFont, Arial, sans-serif; background-color: #181a20; color: #eaecef; padding: 20px 15px; margin: 0; }
-        h1 { color: #f3ba2f; text-align: center; font-size: 22px; }
-        .panel-container { max-width: 500px; margin: 0 auto; }
-        .section-box { background: #2b3139; padding: 15px; border-radius: 10px; margin-bottom: 15px; border-left: 4px solid #f3ba2f; }
-        .section-title { font-size: 15px; font-weight: bold; color: #f3ba2f; margin-bottom: 10px; border-bottom: 1px solid #474f59; padding-bottom: 5px; }
-        .form-group { margin-bottom: 10px; display: flex; flex-direction: column; }
-        label { font-size: 13px; color: #848e9c; margin-bottom: 4px; font-weight: 500; }
-        input, select { padding: 8px 10px; border-radius: 6px; border: 1px solid #474f59; background: #1e2026; color: white; font-size: 14px; }
-        .submit-btn { width: 100%; padding: 14px; background: #f3ba2f; color: #181a20; border: none; border-radius: 6px; font-size: 16px; font-weight: bold; cursor: pointer; margin-top: 15px; margin-bottom: 25px; box-shadow: 0 4px 10px rgba(0,0,0,0.3); transition: background 0.2s; }
-        .submit-btn:hover { background: #dfa516; }
-        .links-area { text-align: center; margin-top: 10px; }
-        .links-area a { display: block; background: #2b3139; color: #f3ba2f; text-decoration: none; padding: 12px; margin: 10px auto; border-radius: 6px; font-weight: bold; border: 1px solid #f3ba2f; max-width: 400px; }
-        .links-area a:hover { background: #f3ba2f; color: #181a20; }
+        * { box-sizing: border-box; }
+        body { font-family: -apple-system, BlinkMacSystemFont, Arial, sans-serif; background-color: #181a20; color: #eaecef; padding: 20px 10px; margin: 0; display: flex; flex-direction: column; align-items: center; }
+        h1 { color: #f3ba2f; font-size: 22px; text-align: center; margin-bottom: 20px; }
+        
+        .setup-panel { width: 100%; max-width: 412px; background: #2b3139; padding: 20px; border-radius: 12px; border-left: 4px solid #f3ba2f; box-shadow: 0 4px 15px rgba(0,0,0,0.3); }
+        .section-title { font-size: 14px; font-weight: bold; color: #f3ba2f; margin-bottom: 12px; border-bottom: 1px solid #474f59; padding-bottom: 5px; text-transform: uppercase; }
+        .form-group { margin-bottom: 12px; display: flex; flex-direction: column; }
+        label { font-size: 12px; color: #848e9c; margin-bottom: 5px; font-weight: 500; }
+        input { padding: 10px; border-radius: 6px; border: 1px solid #474f59; background: #1e2026; color: white; font-size: 14px; }
+        
+        .action-btn { width: 100%; padding: 14px; background: #0ecb81; color: #ffffff; border: none; border-radius: 6px; font-size: 15px; font-weight: bold; cursor: pointer; margin-top: 10px; transition: background 0.2s; }
+        .action-btn:hover { background: #0b9a62; }
+        
+        /* Realistic Phone Frame View Container */
+        .preview-wrapper { width: 100%; max-width: 412px; margin-top: 30px; display: none; background: #ffffff; color: #000000; border-radius: 16px; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.5); position: relative; border: 1px solid #eaecef; }
+        
+        /* iPhone Top Bar Status Layer */
+        .iphone-top-status-bar { height: 38px; display: flex; justify-content: space-between; align-items: center; padding: 0 20px; font-size: 14px; font-weight: 600; color: #000000; background: #ffffff; }
+        .bar-right-icons { display: flex; align-items: center; gap: 5px; }
+        .net-pill { font-size: 10px; background: #000000; color: #ffffff; padding: 1px 4px; border-radius: 4px; font-weight: bold; }
+        .bat-shell { width: 22px; height: 11px; border: 1px solid #000000; border-radius: 3px; display: flex; align-items: center; padding: 1px; position: relative; }
+        .bat-inside-fill { height: 100%; background: #000000; border-radius: 1px; }
+
+        /* Binance App Top Nav Elements */
+        .app-top-nav-bar { display: flex; justify-content: space-between; align-items: center; padding: 10px 16px; background: #ffffff; }
+        .brand-logo-avatar { background: #fcd435; width: 34px; height: 34px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 16px; color: #181a20; }
+        .switch-toggle-pill { display: flex; background: #eaecef; padding: 3px; border-radius: 8px; }
+        .toggle-tab-btn { padding: 6px 14px; font-size: 14px; font-weight: 600; border-radius: 6px; color: #767f8d; }
+        .toggle-tab-active { background: #ffffff; color: #1e2026; }
+        
+        /* Core Summary Wallet Metrics Block */
+        .main-wallet-content-pane { padding: 20px 16px 30px 16px; background: #ffffff; }
+        .name-selector-row { font-size: 14px; font-weight: 600; color: #1e2026; margin-bottom: 6px; display: flex; align-items: center; gap: 4px; }
+        .meta-hex-addr { color: #929aa5; font-size: 12px; font-weight: 400; }
+        .big-crypto-display-balance { font-size: 36px; font-weight: 800; color: #1e2026; margin-bottom: 4px; letter-spacing: -0.5px; }
+        .green-percentage-growth { color: #0ecb81; font-size: 13px; font-weight: 600; }
+        
+        /* Quick Actions Menu Grid */
+        .grid-button-actions-row { display: flex; justify-content: space-between; margin: 25px 0; text-align: center; }
+        .grid-action-node { flex: 1; display: flex; flex-direction: column; align-items: center; gap: 8px; font-size: 13px; font-weight: 500; color: #1e2026; }
+        .node-round-circle-icon { width: 44px; height: 44px; background: #f5f5f5; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 18px; }
+        
+        /* Exclusive Promo Card Box */
+        .airdrop-banner-promo-card { background: #fef8e6; border-radius: 12px; padding: 15px; display: flex; justify-content: space-between; align-items: center; position: relative; margin-bottom: 25px; }
+        .promo-label-tag { font-size: 12px; color: #929aa5; margin-bottom: 4px; }
+        .promo-main-heading { font-size: 14px; font-weight: 700; color: #1e2026; margin-bottom: 6px; }
+        .promo-action-anchor-yellow { color: #dfa516; font-size: 13px; font-weight: 600; text-decoration: none; }
+        
+        /* Asset Tabs Component Section */
+        .tabs-header-group { display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; border-bottom: 2px solid #f5f5f5; padding-bottom: 8px; }
+        .tabs-left-side-nodes { display: flex; gap: 15px; font-size: 16px; font-weight: 700; color: #1e2026; }
+        .node-sub-active { color: #1e2026; border-bottom: 3px solid #fcd435; padding-bottom: 6px; }
+        
+        /* Token Row Item List Row elements */
+        .token-row-item-node { display: flex; justify-content: space-between; align-items: center; padding: 12px 0; }
+        .token-left-meta-info { display: flex; align-items: center; gap: 12px; }
+        .token-icon-avatar-badge { width: 38px; height: 38px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 15px; }
+        .token-symbol-headline-text { font-size: 16px; font-weight: 700; color: #1e2026; }
+        .token-sub-green-percent { font-size: 12px; color: #0ecb81; margin-top: 2px; }
+        .token-right-holding-metrics { text-align: right; }
+        .token-crypto-amount-bold { font-size: 16px; font-weight: 700; color: #1e2026; }
+        .token-fiat-converted-gray-text { font-size: 12px; color: #929aa5; margin-top: 2px; }
     </style>
 </head>
 <body>
 
-    <h1>Binance Clone Multi-Engine</h1>
-    <div class="panel-container">
+    <h1>Binance Live App Engine</h1>
+    
+    <!-- Top Central Form Control Panel Dashboard Box -->
+    <div class="setup-panel">
+        <div class="section-title">⚙️ App Simulator Parameters</div>
         
-        <!-- iPhone Status Bar Control -->
-        <div class="section-box">
-            <div class="section-title">📱 iPhone Top Status Bar Settings</div>
-            <div class="form-group">
-                <label>iPhone Time (e.g., 6:30):</label>
-                <input type="text" id="phoneTime" placeholder="6:30">
-            </div>
-            <div class="form-group">
-                <label>Network Signal & Type (e.g., 4G, 5G, LTE):</label>
-                <input type="text" id="netType" placeholder="4G">
-            </div>
-            <div class="form-group">
-                <label>Battery Percentage (%):</label>
-                <input type="number" id="batPct" placeholder="21">
-            </div>
+        <div class="form-group">
+            <label>iPhone System Time (e.g., 7:10):</label>
+            <input type="text" id="inpTime" value="7:10">
         </div>
-
-        <!-- 1. Web3 Wallet Settings -->
-        <div class="section-box">
-            <div class="section-title">💰 1. Web3 Wallet Balance Settings</div>
-            <div class="form-group">
-                <label>Wallet Name (e.g., John's Wallet):</label>
-                <input type="text" id="walletName" placeholder="John's Wallet">
-            </div>
-            <div class="form-group">
-                <label>Total Balance Amount (USD):</label>
-                <input type="text" id="walletBal" placeholder="42,203.19">
-            </div>
+        
+        <div class="form-group">
+            <label>Battery Level Percentage (%):</label>
+            <input type="number" id="inpBat" value="25" min="1" max="100">
         </div>
-
-        <!-- 2. Deposit Email Notification Settings -->
-        <div class="section-box">
-            <div class="section-title">📩 2. Deposit Email Notification Settings</div>
-            <div class="form-group">
-                <label>Email Title Date (e.g., 2025-04-04):</label>
-                <input type="text" id="emailTitleDate" placeholder="2025-04-04">
-            </div>
-            <div class="form-group">
-                <label>Email Title Time (e.g., 10:43:12):</label>
-                <input type="text" id="emailTitleTime" placeholder="10:43:12">
-            </div>
-            <div class="form-group">
-                <label>Deposited USDT Amount:</label>
-                <input type="text" id="emailAmt" placeholder="773.49665">
-            </div>
+        
+        <div class="form-group">
+            <label>Wallet Profile Account Name:</label>
+            <input type="text" id="inpName" value="John's Wallet">
         </div>
-
-        <!-- 3. Withdrawal Details Settings -->
-        <div class="section-box">
-            <div class="section-title">📤 3. Withdrawal Details Layout Settings</div>
-            <div class="form-group">
-                <label>Withdraw Amount (With minus sign, e.g., -98.5):</label>
-                <input type="text" id="withAmt" placeholder="-98.5">
-            </div>
-            <div class="form-group">
-                <label>Display Total Amount (e.g., 100 USDT):</label>
-                <input type="text" id="withTotalAmt" placeholder="100 USDT">
-            </div>
-            <div class="form-group">
-                <label>Withdrawal History Date & Time:</label>
-                <input type="text" id="withDate" placeholder="2026-08-09 19:45:21">
-            </div>
+        
+        <div class="form-group">
+            <label>Total Wallet Balance Amount (USD):</label>
+            <input type="text" id="inpBal" value="2,000.00">
         </div>
-
-        <!-- এই বাটনটি নিচে যুক্ত করা হয়েছে -->
-        <button class="submit-btn" onclick="saveAllSettings()">Apply & Synchronize Everything</button>
-
-        <div class="links-area">
-            <a href="crypto-wallet.html" target="_blank">🗂️ 1. Open Web3 Crypto Wallet Screen</a>
-            <a href="binance-deposit-email.html" target="_blank">📬 2. Open Custom Deposit Email Screen</a>
-            <a href="withdrawal-details.html" target="_blank">📤 3. Open Custom Withdrawal Screen</a>
-        </div>
+        
+        <button class="action-btn" onclick="generateLiveMockup()">Generate Live Preview Screen</button>
     </div>
 
-    <script>
-        window.onload = function() {
-            document.getElementById('phoneTime').value = localStorage.getItem('p_time') || '6:30';
-            document.getElementById('netType').value = localStorage.getItem('p_net') || '4G';
-            document.getElementById('batPct').value = localStorage.getItem('p_bat') || '21';
-            
-            document.getElementById('walletName').value = localStorage.getItem('w_name') || "John's Wallet";
-            document.getElementById('walletBal').value = localStorage.getItem('w_bal') || '42,203.19';
-            
-            document.getElementById('emailTitleDate').value = localStorage.getItem('e_tdate') || '2025-04-04';
-            document.getElementById('emailTitleTime').value = localStorage.getItem('e_ttime') || '10:43:12';
-            document.getElementById('emailAmt').value = localStorage.getItem('e_amt') || '773.49665';
-            
-            document.getElementById('withAmt').value = localStorage.getItem('wt_amt') || '-98.5';
-            document.getElementById('withTotalAmt').value = localStorage.getItem('wt_tamt') || '100 USDT';
-            document.getElementById('withDate').value = localStorage.getItem('wt_date') || '2026-08-09 19:45:21';
-        }
+    <!-- Hidden Output Canvas Container Box (Shows immediately on button click) -->
+    <div class="preview-wrapper" id="previewArea">
+        
+        <!-- Top Status Layer Component Element Row -->
+        <div class="iphone-top-status-bar">
+            <span id="liveTimeText">6:30</span>
+            <div class="bar-right-icons">
+                <span class="net-pill">4G</span>
+                <span id="liveBatNumText">21%</span>
+                <div class="bat-shell">
+                    <div class="bat-inside-fill" id="liveBatFillWidth" style="width: 21%;"></div>
+                </div>
+            </div>
+        </div>
 
-        function saveAllSettings() {
-            localStorage.setItem('p_time', document.getElementById('phoneTime').value);
-            localStorage.setItem('p_net', document.getElementById('netType').value);
-            localStorage.setItem('p_bat', document.getElementById('batPct').value);
+        <!-- In-App Header Nav Toolbar Module -->
+        <div class="app-top-nav-bar">
+            <div class="brand-logo-avatar">🦡</div>
+            <div class="switch-toggle-pill">
+                <div class="toggle-tab-btn">Exchange</div>
+                <div class="toggle-tab-btn toggle-tab-active">Web3</div>
+            </div>
+            <div style="font-size: 18px; color: #1e2026; font-weight: bold; display: flex; gap: 12px;"><span>⛶</span> <span>🔍</span></div>
+        </div>
+
+        <!-- Main Account Dashboard Elements Display Box -->
+        <div class="main-wallet-content-pane">
+            <div class="name-selector-row">
+                <span id="liveWalletNameText">John's Wallet</span> ▾ 
+                <span class="meta-hex-addr">0x78...Gr4P 📋</span>
+            </div>
             
-            localStorage.setItem('w_name', document.getElementById('walletName').value);
-            localStorage.setItem('w_bal', document.getElementById('walletBal').value);
-            
-            localStorage.setItem('e_tdate', document.getElementById('emailTitleDate').value);
-            localStorage.setItem('e_ttime', document.getElementById('emailTitleTime').value);
-            localStorage.setItem('e_amt', document.getElementById('emailAmt').value);
-            
-            localStorage.setItem('wt_amt', document.getElementById('withAmt').value);
-            localStorage.setItem('wt_tamt', document.getElementById('withTotalAmt').value);
-            localStorage.setItem('wt_date', document.getElementById('withDate').value);
-            
-            alert("All interface database values saved successfully!");
-        }
-    </script>
-</body>
-</html>
+            <div class="big-crypto-display-balance">$<span id="liveWalletBalText">42,203.19</span></div>
+            <div class="green-percentage-growth">+0.21%</div>
+
+            <!-- Action Grid Menu Rows Icons Buttons -->
+            <div class="grid-button-actions-row">
+                <div class="grid-action-node"><div class="node-round-circle-icon" style="background:#f5f5f5;">📤</div>Send</div>
+                <div class="grid-action-node"><div class="node-round-circle-icon" style="background:#f5f5f5;">📥</div>Receive</div>
+                <div class="grid-action-node"><div class="node-round-circle-icon" style="background:#f5f5f5;">⇄</div>Transfer</div>
+                <div class="grid-action-node"><div class="node-round-circle-icon" style="background:#f5f5f5;">•••</div>More</div>
+            </div>
+
+            <!-- Promo Banner component block container -->
+            <div class="airdrop-banner-promo-card">
+                <div>
+                    <div class="promo-label-tag">$500,000 Exclusive Airdrop</div>
+                    <div class="promo-main-heading">Swap to win up to 1 BTC</div>
+                    <a href="#" class="promo-action-anchor-yellow">Join Now</a>
+                </div>
+                <div style="font-size: 32px;">🪙</div>
