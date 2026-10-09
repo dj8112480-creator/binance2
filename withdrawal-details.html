@@ -3,111 +3,56 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Withdrawal Receipt View</title>
+    <title>Withdrawal Details</title>
     <style>
-        body { font-family: -apple-system, BlinkMacSystemFont, Arial, sans-serif; background-color: #000000; color: #ffffff; margin: 0; padding: 0; display: flex; flex-direction: column; align-items: center; }
+        body { font-family: -apple-system, BlinkMacSystemFont, Arial, sans-serif; background-color: #121214; color: #ffffff; margin: 0; padding: 0; display: flex; flex-direction: column; align-items: center; }
         .phone-canvas { width: 100%; max-width: 412px; min-height: 100vh; background-color: #181a20; display: flex; flex-direction: column; box-shadow: 0 0 20px rgba(0,0,0,0.8); }
-        
-        /* iPhone Status Bar Top Layer Row (White indicators icons text) */
         .status-bar { height: 36px; display: flex; justify-content: space-between; align-items: center; padding: 0 20px; font-size: 14px; font-weight: 600; color: #ffffff; background: #181a20; }
-        .status-right { display: flex; align-items: center; gap: 5px; }
-        .net-icon-badge { font-size: 10px; background: #ffffff; color: #000000; padding: 1px 3px; border-radius: 3px; font-weight: bold; }
-        .battery-shell { width: 22px; height: 11px; border: 1px solid #ffffff; border-radius: 3px; display: flex; align-items: center; padding: 1px; position: relative; }
-        .battery-core-fill { height: 100%; background-color: #ffffff; border-radius: 1px; }
-
-        /* Navigation Page Header App Toolbar */
-        .app-header-navigation-row { padding: 12px 16px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #2b3139; }
-        .app-header-title-text { font-size: 17px; font-weight: 700; color: #ffffff; margin: 0 auto 0 auto; text-align: center; }
-        
-        /* Core Center Summary Box Card Block */
-        .withdrawal-summary-hero-card { text-align: center; padding: 25px 16px; }
-        .hero-amount-display-value { font-size: 32px; font-weight: 700; color: #ffffff; margin-bottom: 6px; }
-        .status-completed-pill-tag { color: #0ecb81; font-size: 14px; font-weight: 600; display: flex; align-items: center; justify-content: center; gap: 4px; margin-bottom: 12px; }
-        .notice-paragraph-text-under-hero { color: #848e9c; font-size: 12px; line-height: 1.5; padding: 0 15px; margin-bottom: 6px; }
-        .help-hyperlink-yellow-anchor { color: #dfa516; font-size: 12px; font-weight: 500; text-decoration: none; }
-
-        /* Meta Rows List Group Box Content area */
-        .metadata-records-list-wrapper { padding: 10px 20px; flex-grow: 1; }
-        .data-row-container { display: flex; justify-content: space-between; padding: 14px 0; border-bottom: 1px solid #2b3139; font-size: 14px; align-items: flex-start; }
-        .meta-field-label { color: #848e9c; min-width: 100px; }
-        .meta-field-value { color: #ffffff; font-weight: 500; text-align: right; max-width: 240px; word-break: break-all; }
-        .copy-action-btn-inline { color: #848e9c; font-size: 12px; margin-left: 4px; cursor: pointer; }
-        
-        /* Bottom Large Call To Action Form Button */
-        .action-button-full-width-yellow { display: block; text-align: center; background: #f3ba2f; color: #181a20; font-weight: 700; text-decoration: none; padding: 14px; border-radius: 8px; font-size: 15px; margin: 25px 20px; box-shadow: 0 4px 10px rgba(0,0,0,0.15); }
+        .bar-right { display: flex; align-items: center; gap: 5px; }
+        .net-badge { font-size: 10px; background: #ffffff; color: #000000; padding: 1px 3px; border-radius: 3px; font-weight: bold; }
+        .bat-shell { width: 22px; height: 11px; border: 1px solid #ffffff; border-radius: 3px; display: flex; align-items: center; padding: 1px; }
+        .bat-fill { height: 100%; background-color: #ffffff; border-radius: 1px; }
+        .header-bar { padding: 12px 16px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #2b3139; }
+        .hero-section { text-align: center; padding: 25px 16px; }
+        .hero-amt { font-size: 32px; font-weight: 700; color: #ffffff; margin-bottom: 6px; }
+        .status-pill { color: #0ecb81; font-size: 14px; font-weight: 600; display: flex; align-items: center; justify-content: center; gap: 4px; margin-bottom: 12px; }
+        .data-list { padding: 10px 20px; flex-grow: 1; }
+        .data-row { display: flex; justify-content: space-between; padding: 14px 0; border-bottom: 1px solid #2b3139; font-size: 14px; }
+        .btn-footer { display: block; text-align: center; background: #f3ba2f; color: #181a20; font-weight: 700; text-decoration: none; padding: 14px; border-radius: 8px; font-size: 15px; margin: 25px 20px; }
     </style>
 </head>
 <body>
 
     <div class="phone-canvas">
-        <!-- Status Bar Layer -->
+        <!-- ✍️ আইফোনের টাইম, চার্জ এখানে বদলাবেন -->
         <div class="status-bar">
-            <span id="wtTime">6:54</span>
-            <div class="status-right">
-                <span class="net-icon-badge" id="wtNet">4G</span>
-                <span id="wtBatNum">21%</span>
-                <div class="battery-shell"><div class="battery-core-fill" id="wtBatFill" style="width: 21%;"></div></div>
+            <span>7:50</span>
+            <div class="bar-right">
+                <span class="net-badge">4G</span>
+                <span>25%</span>
+                <div class="bat-shell"><div class="bat-fill" style="width: 25%;"></div></div>
             </div>
         </div>
 
-        <!-- Navigation Title Bar Element Component -->
-        <div class="app-header-navigation-row">
-            <span style="font-size:18px; cursor:pointer;">←</span>
-            <div class="app-header-title-text">Withdrawal Details</div>
-            <span style="font-size:18px; visibility:hidden;">→</span>
+        <div class="header-bar"><span>←</span><span style="font-size:17px; font-weight:700;">Withdrawal Details</span><span style="visibility:hidden;">→</span></div>
+        
+        <div class="hero-section">
+            <!-- ✍️ মেইন বড় মাইনাস অ্যামাউন্ট এখানে বদলাবেন -->
+            <div class="hero-amt" id="vWithHeroAmt">-20,000.00 USDT</div>
+            <div class="status-pill">✓ Completed</div>
+            <div style="color:#848e9c; font-size:12px; line-height:1.5; padding:0 15px;">Crypto transferred out of Binance. Please contact the recipient platform for your receipt.</div>
         </div>
 
-        <!-- Hero Value Header Display block -->
-        <div class="withdrawal-summary-hero-card">
-            <div class="hero-amount-display-value" id="dspWithAmt">-98.5 USDT</div>
-            <div class="status-completed-pill-tag">✓ Completed</div>
-            <div class="notice-paragraph-text-under-hero">Crypto transferred out of Binance. Please contact the recipient platform for your transaction receipt.</div>
-            <a href="#" class="help-hyperlink-yellow-anchor">Why hasn't my withdrawal arrived?</a>
+        <div class="data-list">
+            <div class="data-row"><span style="color:#848e9c;">Network</span><span>TRX</span></div>
+            <div class="data-row"><span style="color:#848e9c;">Address</span><span style="font-family:monospace; text-align:right;">TX7afK9RjMvC5zHqE7bHn2C6eK5d4cfr... 📋</span></div>
+            <!-- ✍️ নিচে ডাবল কনফার্মেশন অ্যামাউন্ট এবং ডেট বদলাবেন -->
+            <div class="data-row"><span style="color:#848e9c;">Amount</span><span>20,000.00 USDT</span></div>
+            <div class="data-row"><span style="color:#848e9c;">Network fee</span><span>1.5 TRX</span></div>
+            <div class="data-row"><span style="color:#848e9c;">Date</span><span>2026-08-09 19:45:21</span></div>
         </div>
-
-        <!-- Details Grid Data Lists Key Value Elements -->
-        <div class="metadata-records-list-wrapper">
-            <div class="data-row-container"><span class="meta-field-label">Network</span><span class="meta-field-value">TRX</span></div>
-            
-            <div class="data-row-container">
-                <span class="meta-field-label">Address</span>
-                <span class="meta-field-value" style="font-family:monospace; font-size:13px;">
-                    TX7afK9RjMvC5zHqE7bHn2C6eK5d4cfr<br>5d4c3b2a <span class="copy-action-btn-inline">📋</span>
-                    <div style="color:#dfa516; font-size:12px; margin-top:4px; font-family:sans-serif;">Save Address</div>
-                </span>
-            </div>
-
-            <div class="data-row-container">
-                <span class="meta-field-label">Txid</span>
-                <span class="meta-field-value" style="font-family:monospace; font-size:12px; color:#848e9c;">
-                    df85b7e88d8b46e356c9a75d5a73e6550<br>742d991b5c4687d653738495a43586 <span class="copy-action-btn-inline">📋</span>
-                </span>
-            </div>
-
-            <div class="data-row-container"><span class="meta-field-label">Amount</span><span class="meta-field-value" id="dspWithTotalAmt">100 USDT</span></div>
-            <div class="data-row-container"><span class="meta-field-label">Network fee</span><span class="meta-field-value">1.5 TRX</span></div>
-            <div class="data-row-container"><span class="meta-field-label">Wallet</span><span class="meta-field-value">Spot Wallet</span></div>
-            <div class="data-row-container"><span class="meta-field-label">Date</span><span class="meta-field-value" id="dspWithDate" style="font-size:13px;">2026-08-09 19:45:21</span></div>
-            
-            <div style="text-align:center; padding:15px 0; color:#848e9c; font-size:13px;">📋 Scan Report</div>
-        </div>
-
-        <!-- Bottom Form Action Button Link Call element -->
-        <a href="index.html" class="action-button-full-width-yellow">Withdraw Again</a>
+        <div class="btn-footer">Withdraw Again</div>
     </div>
 
-    <script>
-        window.onload = function() {
-            document.getElementById('wtTime').innerText = localStorage.getItem('p_time') || '6:54';
-            document.getElementById('wtNet').innerText = localStorage.getItem('p_net') || '4G';
-            let bat = localStorage.getItem('p_bat') || '21';
-            document.getElementById('wtBatNum').innerText = bat + "%";
-            document.getElementById('wtBatFill').style.width = bat + "%";
-            
-            document.getElementById('dspWithAmt').innerText = localStorage.getItem('wt_amt') || '-98.5 USDT';
-            document.getElementById('dspWithTotalAmt').innerText = localStorage.getItem('wt_tamt') || '100 USDT';
-            document.getElementById('dspWithDate').innerText = localStorage.getItem('wt_date') || '2026-08-09 19:45:21';
-        }
-    </script>
 </body>
 </html>
