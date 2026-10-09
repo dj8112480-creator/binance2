@@ -2,70 +2,64 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Binance Deposit Confirmed</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Deposit Confirmed</title>
     <style>
-        body { font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; background-color: #f5f5f5; color: #333333; margin: 0; padding: 20px; }
-        .back-btn { display: inline-block; color: #dfa516; text-decoration: none; margin-bottom: 20px; font-size: 16px; font-weight: bold; }
-        .email-container { max-width: 600px; margin: 0 auto; background: #ffffff; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 12px rgba(0,0,0,0.05); }
-        .email-header { background-color: #181a20; padding: 25px; text-align: left; }
-        .binance-logo { color: #f3ba2f; font-size: 24px; font-weight: bold; letter-spacing: 0.5px; }
-        .email-body { padding: 40px 30px; }
-        .success-title { font-size: 22px; font-weight: 700; color: #1e2026; margin-top: 0; margin-bottom: 20px; }
-        .welcome-text { font-size: 15px; color: #474d57; line-height: 1.6; margin-bottom: 30px; }
-        .details-box { background-color: #fcd43512; border: 1px solid #fcd43430; border-radius: 6px; padding: 20px; margin-bottom: 30px; }
-        .details-row { display: flex; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid #eaecef; font-size: 14px; }
+        body { font-family: -apple-system, BlinkMacSystemFont, Arial, sans-serif; background-color: #121214; color: #ffffff; margin: 0; padding: 0; display: flex; flex-direction: column; align-items: center; }
+        .phone-canvas { width: 100%; max-width: 412px; min-height: 100vh; background-color: #181a20; display: flex; flex-direction: column; }
+        .status-bar { height: 32px; background-color: #181a20; color: #ffffff; display: flex; justify-content: space-between; align-items: center; padding: 0 16px; font-size: 13px; }
+        .status-right { display: flex; align-items: center; gap: 6px; }
+        .battery-icon { width: 22px; height: 11px; border: 1px solid #848e9c; border-radius: 3px; position: relative; display: flex; align-items: center; padding: 1px; }
+        .battery-level { height: 100%; background-color: #eaecef; border-radius: 1px; }
+        .app-header { background-color: #181a20; padding: 15px; display: flex; align-items: center; color: #ffffff; font-weight: 600; font-size: 16px; border-bottom: 1px solid #2b3139; }
+        .app-header a { color: #ffffff; text-decoration: none; margin-right: 20px; }
+        .email-body { padding: 24px 20px; flex-grow: 1; background-color: #181a20; }
+        .success-title { font-size: 22px; font-weight: 700; color: #ffffff; margin-bottom: 12px; margin-top: 5px; }
+        .welcome-text { font-size: 13.5px; color: #848e9c; line-height: 1.5; margin-bottom: 25px; }
+        .details-box { background-color: #1e2026; border-radius: 8px; padding: 16px; margin-bottom: 25px; }
+        .details-row { display: flex; justify-content: space-between; padding: 14px 0; border-bottom: 1px solid #2b3139; font-size: 13px; }
         .details-row:last-child { border-bottom: none; }
-        .label { color: #767f8d; font-weight: 500; }
-        .value { color: #1e2026; font-weight: 600; }
-        .amount-val { color: #0ecb81; font-weight: 700; }
-        .action-btn { display: block; text-align: center; background-color: #f3ba2f; color: #181a20; font-weight: bold; text-decoration: none; padding: 14px; border-radius: 6px; font-size: 16px; transition: background 0.2s; }
-        .action-btn:hover { background-color: #dfa516; }
-        .email-footer { background-color: #f8f9fa; padding: 20px; text-align: center; font-size: 12px; color: #929aa5; border-top: 1px solid #eaecef; line-height: 1.5; }
+        .label { color: #848e9c; }
+        .value { color: #eaecef; font-weight: 500; }
+        .amount-val { color: #0ecb81; font-weight: 700; font-size: 15px; }
+        .footer-notice { font-size: 11px; color: #474d57; text-align: center; margin-top: 50px; }
     </style>
 </head>
 <body>
-
-    <!-- Back Button to Control Panel -->
-    <a href="index.html" class="back-btn">⬅️ Back to Main Menu</a>
-
-    <!-- Official Binance Email Template -->
-    <div class="email-container">
-        <div class="email-header">
-            <span class="binance-logo">BINANCE</span>
+    <div class="phone-canvas">
+        <div class="status-bar">
+            <span class="time">09:41</span>
+            <div class="status-right">
+                <span class="net">4G</span> <span class="bat-num">85%</span>
+                <div class="battery-icon"><div class="battery-level"></div></div>
+            </div>
         </div>
-        
+        <div class="app-header"><a href="index.html">←</a><span>Notification Details</span></div>
         <div class="email-body">
             <h1 class="success-title">Deposit Confirmed</h1>
-            <p class="welcome-text">Dear Customer,<br>Your deposit request has been successfully processed. Please find the transaction details below:</p>
-            
+            <p class="welcome-text">Your deposit request has been successfully completed. Please check your asset details below:</p>
             <div class="details-box">
-                <div class="details-row">
-                    <span class="label">Amount</span>
-                    <span class="value amount-val">1,250.00 USDT</span>
-                </div>
-                <div class="details-row">
-                    <span class="label">Network</span>
-                    <span class="value">TRX (TRC20)</span>
-                </div>
-                <div class="details-row">
-                    <span class="label">TxID</span>
-                    <span class="value" style="font-family: monospace; font-size: 12px;">t97a4b...3e19ff</span>
-                </div>
-                <div class="details-row">
-                    <span class="label">Date & Time</span>
-                    <span class="value">2026-10-09 17:41:25 (UTC)</span>
-                </div>
+                <div class="details-row"><span class="label">Amount</span><span class="value amount-val" id="depAmount">500.00 USDT</span></div>
+                <div class="details-row"><span class="label">Network</span><span class="value">TRX (TRC20)</span></div>
+                <div class="details-row"><span class="label">Status</span><span class="value" style="color: #0ecb81;">Completed</span></div>
+                <div class="details-row"><span class="label">Date & Time</span><span id="depDate" class="value">2026-10-09 17:45 (UTC)</span></div>
             </div>
-
-            <a href="crypto-wallet.html" class="action-btn">View My Balance</a>
-        </div>
-
-        <div class="email-footer">
-            This is an automated electronic notification. Please do not reply to this email.<br>
-            © 2026 Binance.com. All Rights Reserved.
+            <p class="footer-notice">© 2026 Binance.com All Rights Reserved.</p>
         </div>
     </div>
-
+    <script>
+        window.onload = function() {
+            let now = new Date();
+            document.querySelector('.time').innerText = now.getHours().toString().padStart(2, '0') + ":" + now.getMinutes().toString().padStart(2, '0');
+            let amt = localStorage.getItem('b_amount') || '500.00';
+            let bat = localStorage.getItem('b_battery') || '85';
+            let net = localStorage.getItem('b_net') || '4G';
+            document.getElementById('depAmount').innerText = parseFloat(amt).toFixed(2) + " USDT";
+            document.getElementById('depDate').innerText = now.toISOString().slice(0,10) + " " + now.toTimeString().slice(0,5) + " (UTC)";
+            document.querySelector('.bat-num').innerText = bat + "%";
+            document.querySelector('.battery-level').style.width = bat + "%";
+            document.querySelector('.net').innerText = (net === 'Wi-Fi') ? "📶" : net;
+        }
+    </script>
 </body>
 </html>
