@@ -1,26 +1,67 @@
 <!DOCTYPE html>
-<html lang="bn">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Binance Control Panel</title>
+    <title>Binance Original Look Simulator</title>
     <style>
-        body { font-family: Arial, sans-serif; background-color: #181a20; color: #eaecef; text-align: center; padding: 50px; }
-        h1 { color: #f3ba2f; }
-        .menu-container { margin-top: 30px; display: inline-block; text-align: left; background: #2b3139; padding: 20px; border-radius: 10px; }
-        a { display: block; color: #f3ba2f; text-decoration: none; font-size: 18px; margin: 15px 0; padding: 10px; border: 1px solid #f3ba2f; border-radius: 5px; text-align: center; }
-        a:hover { background-color: #f3ba2f; color: #181a20; }
+        body { font-family: -apple-system, BlinkMacSystemFont, Arial, sans-serif; background-color: #181a20; color: #eaecef; text-align: center; padding: 20px 15px; }
+        h1 { color: #f3ba2f; font-size: 24px; margin-bottom: 5px; }
+        .control-container { background: #2b3139; padding: 20px; border-radius: 12px; max-width: 420px; margin: 15px auto; text-align: left; box-shadow: 0 4px 15px rgba(0,0,0,0.4); }
+        .form-group { margin-bottom: 12px; }
+        label { display: block; margin-bottom: 6px; font-weight: bold; color: #848e9c; font-size: 14px; }
+        input, select { width: 94%; padding: 10px; border-radius: 6px; border: 1px solid #474f59; background: #1e2026; color: white; font-size: 15px; }
+        button { width: 100%; padding: 12px; background: #f3ba2f; color: #181a20; border: none; border-radius: 6px; font-size: 16px; font-weight: bold; cursor: pointer; margin-top: 10px; }
+        button:hover { background: #dfa516; }
+        .links { margin-top: 20px; display: flex; flex-direction: column; gap: 10px; align-items: center; }
+        .links a { display: block; width: 90%; max-width: 380px; background: #2b3139; color: #f3ba2f; text-decoration: none; padding: 12px; border-radius: 6px; font-weight: bold; border: 1px solid #f3ba2f; text-align: center; }
     </style>
 </head>
 <body>
-    <h1>Binance প্রজেক্ট কন্ট্রোল প্যানেল</h1>
-    <p>আপনার কাঙ্ক্ষিত পেজে ভিজিট করতে নিচের লিংকগুলোতে ক্লিক করুন:</p>
-    
-    <div class="menu-container">
-        <!-- রিলেটিভ পাথের মাধ্যমে সব পেজ এক লিংকে কন্ট্রোল হবে -->
-        <a href="withdrawal-details.html">➡️ Withdrawal Details (উইথড্রয়াল পেজ)</a>
-        <a href="binance-deposit-email.html">➡️ Binance Deposit Email (ডিপোজিট ইমেইল)</a>
-        <a href="crypto-wallet.html">➡️ Crypto Wallet (ক্রিপ্টো ওয়ালেট)</a>
+
+    <h1>Binance Core Engine</h1>
+    <p>Enter details and click Submit, then open any page below to see the official look:</p>
+
+    <div class="control-container">
+        <div class="form-group">
+            <label>Amount (USDT) - For All Pages:</label>
+            <input type="text" id="amountInput" placeholder="Ex: 500.00">
+        </div>
+        <div class="form-group">
+            <label>Phone Battery (%):</label>
+            <input type="number" id="batteryInput" placeholder="Ex: 85">
+        </div>
+        <div class="form-group">
+            <label>Network Status:</label>
+            <select id="networkInput">
+                <option value="5G">5G</option>
+                <option value="4G">4G</option>
+                <option value="LTE">LTE</option>
+                <option value="Wi-Fi">Wi-Fi</option>
+            </select>
+        </div>
+        <button onclick="updateSystem()">Submit & Save</button>
     </div>
+
+    <div class="links">
+        <a href="withdrawal-details.html" target="_blank">📤 1. Withdrawal Submitted Screen</a>
+        <a href="withdrawal-details (1).html" target="_blank">📑 2. Withdrawal Details View</a>
+        <a href="binance-deposit-email.html" target="_blank">📩 3. In-App Deposit Message</a>
+        <a href="crypto-wallet.html" target="_blank">💰 4. Original Spot Wallet</a>
+    </div>
+
+    <script>
+        window.onload = function() {
+            document.getElementById('amountInput').value = localStorage.getItem('b_amount') || '500.00';
+            document.getElementById('batteryInput').value = localStorage.getItem('b_battery') || '85';
+            document.getElementById('networkInput').value = localStorage.getItem('b_net') || '4G';
+        }
+        function updateSystem() {
+            localStorage.setItem('b_amount', document.getElementById('amountInput').value);
+            localStorage.setItem('b_battery', document.getElementById('batteryInput').value);
+            localStorage.setItem('b_net', document.getElementById('networkInput').value);
+            alert("All pages have been successfully updated to original look!");
+        }
+    </script>
 </body>
 </html>
