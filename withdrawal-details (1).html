@@ -3,57 +3,51 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Withdrawal Details Backup</title>
+    <title>Withdrawal Details List</title>
     <style>
         body { font-family: -apple-system, BlinkMacSystemFont, Arial, sans-serif; background-color: #121214; color: #ffffff; margin: 0; padding: 0; display: flex; flex-direction: column; align-items: center; }
         .phone-canvas { width: 100%; max-width: 412px; min-height: 100vh; background-color: #181a20; display: flex; flex-direction: column; box-shadow: 0 0 20px rgba(0,0,0,0.6); }
-        .status-bar { height: 36px; display: flex; justify-content: space-between; align-items: center; padding: 0 20px; font-size: 14px; font-weight: 600; color: #ffffff; background: #181a20; }
-        .status-right { display: flex; align-items: center; gap: 5px; }
+        .status-bar { height: 36px; display: flex; justify-content: space-between; align-items: center; padding: 0 20px; font-size: 14px; font-weight: 600; color: #ffffff; }
+        .bar-right { display: flex; align-items: center; gap: 5px; }
         .net-icon-badge { font-size: 10px; background: #ffffff; color: #000000; padding: 1px 3px; border-radius: 3px; font-weight: bold; }
-        .battery-shell { width: 22px; height: 11px; border: 1px solid #ffffff; border-radius: 3px; display: flex; align-items: center; padding: 1px; position: relative; }
+        .battery-shell { width: 22px; height: 11px; border: 1px solid #ffffff; border-radius: 3px; display: flex; align-items: center; padding: 1px; }
         .battery-core-fill { height: 100%; background-color: #ffffff; border-radius: 1px; }
         .app-header { padding: 15px; display: flex; align-items: center; font-size: 16px; font-weight: 600; border-bottom: 1px solid #2b3139; }
-        .app-header a { color: white; text-decoration: none; margin-right: 20px; }
         .amount-section { text-align: center; padding: 30px 0 20px 0; }
         .amount-num { font-size: 34px; font-weight: 700; color: #ffffff; }
         .status-badge { display: inline-block; background: rgba(14, 203, 129, 0.1); color: #0ecb81; font-size: 12px; font-weight: 600; padding: 4px 10px; border-radius: 4px; margin-top: 8px; }
         .details-list { padding: 10px 20px; flex-grow: 1; }
         .row-item { display: flex; justify-content: space-between; padding: 16px 0; border-bottom: 1px solid #2b3139; font-size: 13px; }
-        .lbl { color: #848e9c; }
-        .val { color: #ffffff; font-weight: 500; text-align: right; }
     </style>
 </head>
 <body>
     <div class="phone-canvas">
         <div class="status-bar">
-            <span class="time" id="bkTime">6:54</span>
+            <span id="bkTime">6:54</span>
             <div class="status-right">
                 <span class="net-icon-badge" id="bkNet">4G</span> <span id="bkBatNum">21%</span>
-                <div class="battery-shell"><div class="battery-core-fill" id="bkBatFill" style="width: 21%;"></div></div>
+                <div class="battery-shell"><div class="battery-core-fill" id="bkBatFill"></div></div>
             </div>
         </div>
-        <div class="app-header"><a href="index.html">←</a><span>Withdrawal Details</span></div>
-        
+        <div class="app-header"><span>← Withdrawal Details</span></div>
         <div class="amount-section">
             <div><span class="amount-num" id="detAmount">-98.5</span><span style="font-size:16px; margin-left:5px; color:#f3ba2f;">USDT</span></div>
             <div class="status-badge">Completed</div>
         </div>
-
         <div class="details-list">
-            <div class="row-item"><span class="lbl">Status</span><span class="val" style="color: #0ecb81; font-weight: bold;">Completed</span></div>
-            <div class="row-item"><span class="lbl">Date</span><span id="detDate" class="val">2026-08-09 19:45:21</span></div>
-            <div class="row-item"><span class="lbl">Network</span><span class="val">TRX (TRC20)</span></div>
+            <div class="row-item"><span style="color:#848e9c;">Status</span><span style="color: #0ecb81; font-weight: bold;">Completed</span></div>
+            <div class="row-item"><span style="color:#848e9c;">Date</span><span id="detDate">2026-08-09 19:45:21</span></div>
+            <div class="row-item"><span style="color:#848e9c;">Network</span><span>TRX (TRC20)</span></div>
         </div>
     </div>
     <script>
         window.onload = function() {
             document.getElementById('bkTime').innerText = localStorage.getItem('p_time') || '6:54';
             document.getElementById('bkNet').innerText = localStorage.getItem('p_net') || '4G';
-            let bat = localStorage.getItem('p_bat') || '21';
+            var bat = localStorage.getItem('p_bat') || '21';
             document.getElementById('bkBatNum').innerText = bat + "%";
             document.getElementById('bkBatFill').style.width = bat + "%";
-            
-            document.getElementById('detAmount').innerText = localStorage.getItem('wt_amt') || '-98.5';
+            document.getElementById('detAmount').innerText = localStorage.getItem('wt_hamt') || '-98.5 USDT';
             document.getElementById('detDate').innerText = localStorage.getItem('wt_date') || '2026-08-09 19:45:21';
         }
     </script>
