@@ -1,22 +1,66 @@
 <!DOCTYPE html>
-<html lang="bn">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Withdrawal Details</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Withdrawal Submitted</title>
     <style>
-        body { font-family: Arial, sans-serif; background-color: #181a20; color: #eaecef; padding: 30px; }
-        .back-btn { display: inline-block; color: #f3ba2f; text-decoration: none; margin-bottom: 20px; font-size: 18px; }
-        .card { background: #2b3139; padding: 20px; border-radius: 8px; border-left: 5px solid #f3ba2f; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif; background-color: #121214; color: #eaecef; margin: 0; padding: 0; display: flex; flex-direction: column; align-items: center; }
+        .phone-canvas { width: 100%; max-width: 412px; min-height: 100vh; background-color: #181a20; display: flex; flex-direction: column; }
+        .status-bar { height: 32px; background-color: #181a20; display: flex; justify-content: space-between; align-items: center; padding: 0 16px; font-size: 13px; font-weight: 500; }
+        .status-right { display: flex; align-items: center; gap: 6px; }
+        .battery-icon { width: 22px; height: 11px; border: 1px solid #848e9c; border-radius: 3px; position: relative; display: flex; align-items: center; padding: 1px; }
+        .battery-level { height: 100%; background-color: #eaecef; border-radius: 1px; }
+        .app-header { padding: 15px; display: flex; align-items: center; font-size: 16px; font-weight: 600; border-bottom: 1px solid #2b3139; }
+        .app-header a { color: #ffffff; text-decoration: none; margin-right: 20px; font-size: 18px; }
+        .content { padding: 35px 24px; text-align: center; flex-grow: 1; }
+        .success-circle { width: 56px; height: 56px; background: rgba(14, 203, 129, 0.15); border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; margin-bottom: 20px; }
+        .success-check { color: #0ecb81; font-size: 28px; font-weight: bold; }
+        .amount-title { font-size: 26px; font-weight: 700; color: #ffffff; margin-bottom: 4px; }
+        .status-text { color: #848e9c; font-size: 13px; margin-bottom: 35px; }
+        .info-box { background: #1e2026; border-radius: 8px; padding: 16px; text-align: left; }
+        .info-row { display: flex; justify-content: space-between; padding: 12px 0; border-bottom: 1px solid #2b3139; font-size: 13px; }
+        .info-row:last-child { border-bottom: none; }
+        .label { color: #848e9c; }
+        .value { color: #eaecef; font-weight: 500; }
+        .btn-done { display: block; text-align: center; background-color: #f3ba2f; color: #181a20; font-weight: bold; text-decoration: none; padding: 12px; border-radius: 6px; font-size: 14px; margin-top: 40px; }
     </style>
 </head>
 <body>
-    <a href="index.html" class="back-btn">⬅️ মূল মেনুতে ফিরে যান</a>
-    <div class="card">
-        <h2>Withdrawal Details (উইথড্রয়াল বিবরণ)</h2>
-        <p><strong>স্ট্যাটাস:</strong> সম্পন্ন (Completed)</p>
-        <p><strong>পরিমাণ:</strong> 0.005 BTC</p>
-        <p><strong>তারিখ:</strong> ২০২৬-১০-০৯</p>
+    <div class="phone-canvas">
+        <div class="status-bar">
+            <span class="time">09:41</span>
+            <div class="status-right">
+                <span class="net">4G</span> <span class="bat-num">85%</span>
+                <div class="battery-icon"><div class="battery-level"></div></div>
+            </div>
+        </div>
+        <div class="app-header"><a href="index.html">←</a><span>Withdrawal Submitted</span></div>
+        <div class="content">
+            <div class="success-circle"><span class="success-check">✓</span></div>
+            <div class="amount-title" id="dispAmount">500.00 USDT</div>
+            <div class="status-text">Withdrawal request submitted</div>
+            <div class="info-box">
+                <div class="info-row"><span class="label">Destination</span><span class="value">Crypto Address</span></div>
+                <div class="info-row"><span class="label">Network</span><span class="value">TRX (TRC20)</span></div>
+                <div class="info-row"><span class="label">Source</span><span class="value">Spot Wallet</span></div>
+            </div>
+            <a href="index.html" class="btn-done">Done</a>
+        </div>
     </div>
+    <script>
+        window.onload = function() {
+            let now = new Date();
+            document.querySelector('.time').innerText = now.getHours().toString().padStart(2, '0') + ":" + now.getMinutes().toString().padStart(2, '0');
+            let amt = localStorage.getItem('b_amount') || '500.00';
+            let bat = localStorage.getItem('b_battery') || '85';
+            let net = localStorage.getItem('b_net') || '4G';
+            document.getElementById('dispAmount').innerText = parseFloat(amt).toFixed(2) + " USDT";
+            document.querySelector('.bat-num').innerText = bat + "%";
+            document.querySelector('.battery-level').style.width = bat + "%";
+            document.querySelector('.net').innerText = (net === 'Wi-Fi') ? "📶" : net;
+        }
+    </script>
 </body>
 </html>
+
