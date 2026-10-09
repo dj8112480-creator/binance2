@@ -3,71 +3,166 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Spot Wallet</title>
+    <title>Binance Web3 Wallet</title>
     <style>
-        body { font-family: -apple-system, BlinkMacSystemFont, Arial, sans-serif; background-color: #121214; color: #eaecef; margin: 0; padding: 0; display: flex; flex-direction: column; align-items: center; }
-        .phone-canvas { width: 100%; max-width: 412px; min-height: 100vh; background-color: #181a20; display: flex; flex-direction: column; }
-        .status-bar { height: 32px; background-color: #181a20; color: #ffffff; display: flex; justify-content: space-between; align-items: center; padding: 0 16px; font-size: 13px; }
-        .status-right { display: flex; align-items: center; gap: 6px; }
-        .battery-icon { width: 22px; height: 11px; border: 1px solid #848e9c; border-radius: 3px; position: relative; display: flex; align-items: center; padding: 1px; }
-        .battery-level { height: 100%; background-color: #eaecef; border-radius: 1px; }
-        .wallet-nav { padding: 15px; display: flex; align-items: center; font-size: 16px; font-weight: bold; border-bottom: 1px solid #2b3139; }
-        .wallet-nav a { color: white; text-decoration: none; margin-right: 20px; }
-        .balance-card { padding: 22px 20px; background-color: #1e2026; }
-        .title { color: #848e9c; font-size: 12px; margin-bottom: 6px; }
-        .crypto-balance { font-size: 28px; font-weight: 700; color: #ffffff; }
-        .fiat-balance { color: #848e9c; font-size: 13px; margin-top: 4px; font-weight: 500; }
-        .list-section { padding: 20px; background: #181a20; flex-grow: 1; }
-        .section-header { font-size: 15px; font-weight: bold; margin-bottom: 12px; color: #ffffff; }
-        .coin-row { display: flex; justify-content: space-between; align-items: center; padding: 15px 0; border-bottom: 1px solid #2b3139; }
-        .coin-name { font-weight: bold; font-size: 15px; color: white; }
-        .coin-full { color: #848e9c; font-size: 11px; display: block; margin-top: 2px; }
-        .coin-vals { text-align: right; }
-        .coin-amount { font-weight: 600; font-size: 15px; color: white; }
-        .coin-usd { color: #848e9c; font-size: 11px; margin-top: 2px; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background-color: #f7f7f7; margin: 0; padding: 0; display: flex; flex-direction: column; align-items: center; }
+        .iphone-frame { width: 100%; max-width: 412px; min-height: 100vh; background: #ffffff; display: flex; flex-direction: column; box-shadow: 0 0 20px rgba(0,0,0,0.1); position: relative; }
+        
+        /* iPhone Status Bar (Dark text on light app) */
+        .iphone-status-bar { height: 36px; display: flex; justify-content: space-between; align-items: center; padding: 0 20px; font-size: 14px; font-weight: 600; color: #000000; background: #ffffff; }
+        .status-right-icons { display: flex; align-items: center; gap: 5px; }
+        .net-badge { font-size: 10px; background: #000000; color: #ffffff; padding: 1px 3px; border-radius: 3px; font-weight: bold; }
+        .battery-body { width: 22px; height: 11px; border: 1px solid #000000; border-radius: 3px; display: flex; align-items: center; padding: 1px; position: relative; }
+        .battery-fill { height: 100%; background: #000000; border-radius: 1px; }
+        
+        /* Top Navigation Header */
+        .wallet-header-nav { display: flex; justify-content: space-between; align-items: center; padding: 10px 16px; background: #ffffff; }
+        .logo-box { background: #fcd435; width: 34px; height: 34px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 18px; }
+        .tab-switch { display: flex; background: #eaecef; padding: 3px; border-radius: 8px; }
+        .tab-item { padding: 6px 14px; font-size: 14px; font-weight: 600; border-radius: 6px; color: #767f8d; }
+        .tab-active { background: #ffffff; color: #1e2026; }
+        .icon-actions { display: flex; gap: 15px; font-size: 18px; color: #1e2026; font-weight: bold; }
+        
+        /* Main Wallet Display Card */
+        .wallet-main-body { padding: 20px 16px; flex-grow: 1; background: #ffffff; }
+        .account-selector { font-size: 14px; color: #1e2026; font-weight: 600; margin-bottom: 8px; display: flex; align-items: center; gap: 5px; }
+        .addr-tag { color: #929aa5; font-size: 12px; font-weight: 400; }
+        .main-balance { font-size: 36px; font-weight: 800; color: #1e2026; margin-bottom: 4px; }
+        .growth-rate { color: #0ecb81; font-size: 14px; font-weight: 600; }
+        
+        /* Grid Quick Actions Button Row */
+        .action-grid-row { display: flex; justify-content: space-between; margin: 25px 0; text-align: center; }
+        .action-btn-item { flex: 1; display: flex; flex-direction: column; align-items: center; gap: 8px; font-size: 13px; font-weight: 500; color: #1e2026; }
+        .action-circle-icon { width: 44px; height: 44px; background: #f5f5f5; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 20px; font-weight: bold; }
+        
+        /* Promo Banner Area */
+        .airdrop-banner { background: #fef8e6; border-radius: 12px; padding: 15px; display: flex; justify-content: space-between; align-items: center; position: relative; margin-bottom: 25px; }
+        .banner-text-title { font-size: 12px; color: #929aa5; margin-bottom: 4px; }
+        .banner-text-heading { font-size: 14px; font-weight: 700; color: #1e2026; margin-bottom: 6px; }
+        .banner-text-link { color: #dfa516; font-size: 13px; font-weight: 600; text-decoration: none; }
+        .banner-img-box { font-size: 32px; }
+        .close-banner-btn { position: absolute; right: 10px; top: 8px; color: #929aa5; font-size: 14px; }
+
+        /* Cryptos Tabs Section Header */
+        .crypto-section-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; border-bottom: 2px solid #f5f5f5; padding-bottom: 8px; }
+        .section-tabs-left { display: flex; gap: 15px; font-size: 16px; font-weight: 700; color: #1e2026; }
+        .tab-sub-active { color: #1e2026; border-bottom: 3px solid #fcd435; padding-bottom: 6px; }
+        .tab-sub-inactive { color: #929aa5; }
+        
+        /* Token Row Lists Assets */
+        .token-item-list-row { display: flex; justify-content: space-between; align-items: center; padding: 12px 0; }
+        .token-left-side { display: flex; align-items: center; gap: 12px; }
+        .token-circle-avatar { width: 38px; height: 38px; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold; font-size: 14px; }
+        .bnb-bg { background: #f3ba2f; }
+        .eth-bg { background: #627eea; }
+        .token-symbol-text { font-size: 16px; font-weight: 700; color: #1e2026; }
+        .token-full-title { font-size: 12px; color: #929aa5; margin-top: 2px; }
+        .token-right-values { text-align: right; }
+        .token-crypto-holding-amount { font-size: 16px; font-weight: 700; color: #1e2026; }
+        .token-fiat-converted-val { font-size: 12px; color: #929aa5; margin-top: 2px; }
     </style>
 </head>
 <body>
-    <div class="phone-canvas">
-        <div class="status-bar">
-            <span class="time">09:41</span>
-            <div class="status-right">
-                <span class="net">4G</span> <span class="bat-num">85%</span>
-                <div class="battery-icon"><div class="battery-level"></div></div>
+
+    <div class="iphone-frame">
+        <!-- Status Bar Layer Component -->
+        <div class="iphone-status-bar">
+            <span id="stTime">6:30</span>
+            <div class="status-right-icons">
+                <span class="net-badge" id="stNet">4G</span>
+                <span id="stBatNum">21%</span>
+                <div class="battery-body">
+                    <div class="battery-fill" id="stBatFill" style="width: 21%;"></div>
+                </div>
             </div>
         </div>
-        <div class="wallet-nav"><a href="index.html">←</a><span>Spot Wallet</span></div>
-        <div class="balance-card">
-            <div class="title">Total Balance</div>
-            <div class="crypto-balance" id="cryptoTotal">0.00000000 <span style="font-size: 15px; color:#f3ba2f;">BTC</span></div>
-            <div class="fiat-balance" id="fiatTotal">≈ $500.00 USD</div>
-        </div>
-        <div class="list-section">
-            <div class="section-header">Crypto Balances</div>
-            <div class="coin-row">
-                <div><span class="coin-name">USDT</span><span class="coin-full">Tether US</span></div>
-                <div class="coin-vals"><span class="coin-amount" id="coinAmt">500.00</span><span class="coin-usd" id="coinUsd">$500.00</span></div>
+
+        <!-- In-App Header Block -->
+        <div class="wallet-header-nav">
+            <div class="logo-box">🦡</div>
+            <div class="tab-switch">
+                <div class="tab-item">Exchange</div>
+                <div class="tab-item tab-active">Web3</div>
             </div>
+            <div class="icon-actions"><span>⛶</span> <span>🔍</span></div>
+        </div>
+
+        <div class="wallet-main-body">
+            <!-- Selector Title Card -->
+            <div class="account-selector">
+                <span id="dspWalletName">John's Wallet</span> ▾ 
+                <span class="addr-tag">0x78...Gr4P 📋</span>
+            </div>
+            
+            <div class="main-balance">$<span id="dspWalletBal">42,203.19</span></div>
+            <div class="growth-rate">+0.21%</div>
+
+            <!-- Quick Grid Actions Menu Buttons -->
+            <div class="action-grid-row">
+                <div class="action-btn-item"><div class="action-circle-icon">📤</div>Send</div>
+                <div class="action-btn-item"><div class="action-circle-icon">📥</div>Receive</div>
+                <div class="action-btn-item"><div class="action-circle-icon">⇄</div>Transfer</div>
+                <div class="action-btn-item"><div class="action-circle-icon">•••</div>More</div>
+            </div>
+
+            <!-- Airdrop Promo Offer Card Component -->
+            <div class="airdrop-banner">
+                <div>
+                    <div class="banner-text-title">$500,000 Exclusive Airdrop</div>
+                    <div class="banner-text-heading">Swap to win up to 1 BTC</div>
+                    <a href="#" class="banner-text-link">Join Now</a>
+                </div>
+                <div class="banner-img-box">🪙</div>
+                <div class="close-banner-btn">×</div>
+            </div>
+
+            <!-- Asset Tabs Header Section -->
+            <div class="crypto-section-header">
+                <div class="section-tabs-left">
+                    <span class="tab-sub-active">Crypto</span>
+                    <span class="tab-sub-inactive">Collectibles</span>
+                </div>
+                <div style="font-size: 18px; color: #929aa5;">⚏</div>
+            </div>
+
+            <!-- Token Records Lists Row Elements -->
+            <div class="token-item-list-row">
+                <div class="token-left-side">
+                    <div class="token-circle-avatar bnb-bg">🔶</div>
+                    <div>
+                        <div class="token-symbol-text">BNB</div>
+                        <div class="token-full-title" style="color: #0ecb81;">$308.83 +2.38%</div>
+                    </div>
+                </div>
+                <div class="token-right-values">
+                    <div class="token-crypto-holding-amount">5.32501</div>
+                    <div class="token-fiat-converted-val">$1,643.07</div>
+                </div>
+            </div>
+
+            <div class="token-item-list-row">
+                <div class="token-left-side">
+                    <div class="token-circle-avatar eth-bg">♦</div>
+                    <div>
+                        <div class="token-symbol-text">ETH</div>
+                        <div class="token-full-title" style="color: #f6465d;">$1,556.27 -0.17%</div>
+                    </div>
+                </div>
+                <div class="token-right-values">
+                    <div class="token-crypto-holding-amount">0.1664</div>
+                    <div class="token-fiat-converted-val">$259.93</div>
+                </div>
+            </div>
+
         </div>
     </div>
+
     <script>
         window.onload = function() {
-            let now = new Date();
-            document.querySelector('.time').innerText = now.getHours().toString().padStart(2, '0') + ":" + now.getMinutes().toString().padStart(2, '0');
-            let amt = localStorage.getItem('b_amount') || '500.00';
-            let bat = localStorage.getItem('b_battery') || '85';
-            let net = localStorage.getItem('b_net') || '4G';
-            let formattedAmt = parseFloat(amt).toFixed(2);
-            let simulatedBTC = (amt / 62000).toFixed(8); 
+            document.getElementById('stTime').innerText = localStorage.getItem('p_time') || '6:30';
+            document.getElementById('stNet').innerText = localStorage.getItem('p_net') || '4G';
+            let bat = localStorage.getItem('p_bat') || '21';
+            document.getElementById('stBatNum').innerText = bat + "%";
+            document.getElementById('stBatFill').style.width = bat + "%";
             
-            document.getElementById('cryptoTotal').innerHTML = simulatedBTC + ' <span style="font-size: 15px; color:#f3ba2f;">BTC</span>';
-            document.getElementById('fiatTotal').innerText = "≈ $" + formattedAmt + " USD";
-            document.getElementById('coinAmt').innerText = formattedAmt;
-            document.getElementById('coinUsd').innerText = "$" + formattedAmt;
-            document.querySelector('.bat-num').innerText = bat + "%";
-            document.querySelector('.battery-level').style.width = bat + "%";
-            document.querySelector('.net').innerText = (net === 'Wi-Fi') ? "📶" : net;
-        }
-    </script>
-</body>
-</html>
+            document.getElementById('dspWalletName').innerText = localStorage.getItem('w_name') || "John's Wallet";
