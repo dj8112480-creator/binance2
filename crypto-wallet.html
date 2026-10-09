@@ -5,39 +5,39 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Binance Web3 Wallet</title>
     <style>
-        body { font-family: -apple-system, BlinkMacSystemFont, Arial, sans-serif; background-color: #f7f7f7; margin: 0; padding: 0; display: flex; flex-direction: column; align-items: center; }
-        .iphone-frame { width: 100%; max-width: 412px; min-height: 100vh; background: #ffffff; display: flex; flex-direction: column; box-shadow: 0 0 20px rgba(0,0,0,0.1); position: relative; }
-        .status-bar { height: 36px; display: flex; justify-content: space-between; align-items: center; padding: 0 20px; font-size: 14px; font-weight: 600; color: #000000; background: #ffffff; }
+        body { font-family: -apple-system, BlinkMacSystemFont, Arial, sans-serif; background: #f7f7f7; margin: 0; padding: 0; display: flex; flex-direction: column; align-items: center; }
+        .phone { width: 100%; max-width: 412px; min-height: 100vh; background: #ffffff; display: flex; flex-direction: column; box-shadow: 0 0 20px rgba(0,0,0,0.1); }
+        .status-bar { height: 36px; display: flex; justify-content: space-between; align-items: center; padding: 0 20px; font-size: 14px; font-weight: 600; color: #000000; }
         .bar-right { display: flex; align-items: center; gap: 5px; }
         .net-badge { font-size: 10px; background: #000000; color: #ffffff; padding: 1px 4px; border-radius: 4px; font-weight: bold; }
         .bat-shell { width: 22px; height: 11px; border: 1px solid #000000; border-radius: 3px; display: flex; align-items: center; padding: 1px; }
-        .bat-fill { height: 100%; background: #000000; border-radius: 1px; }
+        .bat-fill { height: 100%; background: #000000; border-radius: 1px; width: 21%; }
         .header-nav { display: flex; justify-content: space-between; align-items: center; padding: 10px 16px; }
-        .logo-box { background: #fcd435; width: 34px; height: 34px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-weight: bold; }
-        .tab-switch { display: flex; background: #eaecef; padding: 3px; border-radius: 8px; }
-        .tab-item { padding: 6px 14px; font-size: 14px; font-weight: 600; border-radius: 6px; color: #767f8d; }
-        .tab-active { background: #ffffff; color: #1e2026; }
-        .main-pane { padding: 20px 16px; flex-grow: 1; }
-        .acc-row { font-size: 14px; font-weight: 600; color: #1e2026; margin-bottom: 8px; }
-        .big-bal { font-size: 36px; font-weight: 800; color: #1e2026; margin-bottom: 4px; }
+        .logo-box { background: #fcd435; width: 32px; height: 34px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 15px; }
+        .tab-switch { display: flex; background: #eaecef; padding: 2px; border-radius: 8px; }
+        .tab-item { padding: 6px 14px; font-size: 13.5px; font-weight: 600; border-radius: 6px; color: #767f8d; }
+        .tab-active { background: #ffffff; color: #1e2026; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
+        .main-pane { padding: 16px; }
+        .acc-row { font-size: 14px; font-weight: 600; color: #1e2026; }
+        .big-bal { font-size: 34px; font-weight: 800; color: #1e2026; margin: 6px 0 2px 0; letter-spacing: -0.5px; }
         .growth { color: #0ecb81; font-size: 13px; font-weight: 600; }
         .grid-actions { display: flex; justify-content: space-between; margin: 25px 0; text-align: center; }
-        .grid-node { flex: 1; display: flex; flex-direction: column; align-items: center; gap: 8px; font-size: 13px; color: #1e2026; }
+        .grid-node { flex: 1; display: flex; flex-direction: column; align-items: center; gap: 6px; font-size: 12.5px; font-weight: 500; color: #1e2026; }
         .node-circle { width: 44px; height: 44px; background: #f5f5f5; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 18px; }
-        .promo-card { background: #fef8e6; border-radius: 12px; padding: 15px; display: flex; justify-content: space-between; align-items: center; margin-bottom: 25px; }
-        .token-row { display: flex; justify-content: space-between; align-items: center; padding: 12px 0; border-bottom: 1px solid #f5f5f5; }
+        .promo-card { background: #fef8e6; border-radius: 12px; padding: 12px 15px; display: flex; justify-content: space-between; align-items: center; margin-bottom: 25px; }
+        .token-row { display: flex; justify-content: space-between; align-items: center; padding: 14px 0; border-bottom: 1px solid #f5f5f5; }
     </style>
 </head>
 <body>
 
-    <div class="iphone-frame">
-        <!-- ✍️ আইফোনের টাইম, চার্জ এখানে বদলাবেন -->
+    <div class="phone">
+        <!-- ✍️ আইফোনের টাইম ও চার্জ এখানে বদলাবেন -->
         <div class="status-bar">
-            <span>7:50</span>
+            <span>6:30</span>
             <div class="bar-right">
-                <span class="net-badge">5G</span>
-                <span>25%</span>
-                <div class="bat-shell"><div class="bat-fill" style="width: 25%;"></div></div>
+                <span class="net-badge">4G</span>
+                <span>21%</span>
+                <div class="bat-shell"><div class="bat-fill"></div></div>
             </div>
         </div>
 
@@ -47,14 +47,14 @@
                 <div class="tab-item">Exchange</div>
                 <div class="tab-item tab-active">Web3</div>
             </div>
-            <div style="font-size: 18px; font-weight: bold; display: flex; gap: 12px;"><span>⛶</span> <span>🔍</span></div>
+            <div style="font-size: 16px; font-weight: bold; display: flex; gap: 12px;"><span>⛶</span> <span>🔍</span></div>
         </div>
 
         <div class="main-pane">
             <div class="acc-row">John's Wallet ▾ <span style="color:#929aa5; font-weight:400; font-size:12px;">0x78...Gr4P 📋</span></div>
             
-            <!-- ✍️ ওয়ালেটের ডলার এখানে বদলাবেন -->
-            <div class="big-bal">$20,000.00</div>
+            <!-- ✍️ মেইন ওয়ালেট ব্যালেন্স ডলার এখানে বদলাবেন -->
+            <div class="big-bal">$42,203.19</div>
             <div class="growth">+0.21%</div>
 
             <div class="grid-actions">
